@@ -4,8 +4,10 @@ import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { useState } from "react";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 const Login = () => {
+  const axiosCommon = useAxiosCommon();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state || "/";
@@ -47,12 +49,31 @@ const Login = () => {
   };
 
   // handle google signin
+  // const handleGoogleSignIn = async () => {
+  //   try {
+  //     await signInWithGoogle();
+
+  //     navigate(from);
+  //     toast.success("Signup Successful");
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast.error(err.message);
+  //   }
+  // };
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
+      const result = await signInWithGoogle();
+      const user = result.user;
 
-      navigate(from);
-      toast.success("Signup Successful");
+      // send user to db
+      const userInfo = { name: user.displayName, email: user.email };
+
+      axiosCommon.post("/users", userInfo).then((res) => {
+        if (res.data.insertedId) {
+          navigate("/");
+          toast.success("Signup Successful, user added");
+        }
+      });
     } catch (err) {
       console.log(err);
       toast.error(err.message);

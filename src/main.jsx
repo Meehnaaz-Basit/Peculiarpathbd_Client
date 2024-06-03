@@ -14,6 +14,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import PackageSingleDetail from "./components/packageDetailsPage/PackageSingleDetail";
 import AllPackages from "./components/AllPackages/AllPackages";
 import GuideSingleDetail from "./pages/Home/TabSection/Tab3Items/MeetOurGuides/GuideSingleDetail";
+import TourTypeCatPage from "./components/TourType/TourTypeCatPage";
+import DashBoardLayout from "./layouts/DashBoardLayout";
+import Profile from "./Dashboard/Shared/Profile";
+import MyWishlist from "./Dashboard/User/MyWishlist";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -46,6 +50,24 @@ const router = createBrowserRouter([
       {
         path: "/tourGuides/:id",
         element: <GuideSingleDetail></GuideSingleDetail>,
+      },
+      {
+        path: "/packages/tour-type/:tourType",
+        element: <TourTypeCatPage></TourTypeCatPage>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashBoardLayout></DashBoardLayout>,
+    children: [
+      {
+        path: "/dashboard/myProfile",
+        element: <Profile></Profile>,
+      },
+      {
+        path: "/dashboard/myWishlist",
+        element: <MyWishlist></MyWishlist>,
       },
     ],
   },

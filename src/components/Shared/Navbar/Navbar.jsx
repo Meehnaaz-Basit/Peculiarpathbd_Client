@@ -186,9 +186,7 @@ const Navbar = () => {
                 )}
               </div>
               <div>
-                <button onClick={logOut}>
-                  <Button buttonText="LogOut"></Button>
-                </button>
+                <button onClick={logOut}>logOut</button>
               </div>
             </>
           ) : (

@@ -23,6 +23,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [wishlist, setWishlist] = useState([]);
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -46,9 +47,9 @@ const AuthProvider = ({ children }) => {
 
   const logOut = async () => {
     setLoading(true);
-    await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
-      withCredentials: true,
-    });
+    // await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
+    //   withCredentials: true,
+    // });
     return signOut(auth);
   };
 
@@ -70,6 +71,9 @@ const AuthProvider = ({ children }) => {
 
   // onAuthStateChange
   useEffect(() => {
+    // Retrieve wishlist data from localStorage
+    const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    setWishlist(storedWishlist);
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       //   if (currentUser) {
@@ -82,6 +86,25 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
+  const addToWishlist = (item) => {
+    const updatedWishlist = [...wishlist, item];
+    setWishlist(updatedWishlist);
+    // Save updated wishlist data to localStorage
+    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+  };
+
+  const removeFromWishlist = (itemId) => {
+    const updatedWishlist = wishlist.filter((item) => item._id !== itemId);
+    setWishlist(updatedWishlist);
+    // Save updated wishlist data to localStorage
+    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+  };
+
+  const clearWishlist = () => {
+    setWishlist([]);
+    localStorage.removeItem("wishlist");
+  };
+
   const authInfo = {
     user,
     loading,
@@ -92,6 +115,10 @@ const AuthProvider = ({ children }) => {
     resetPassword,
     logOut,
     updateUserProfile,
+    wishlist,
+    addToWishlist,
+    removeFromWishlist,
+    clearWishlist,
   };
 
   return (

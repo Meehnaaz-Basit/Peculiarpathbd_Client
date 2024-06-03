@@ -34,7 +34,7 @@ const OurPackages = () => {
           <Link
             key={item._id}
             to={{
-              pathname: `/packages/${item._id}`,
+              // pathname: `/packages/${item._id}`,
               state: { from: location },
               search: location.search, // Maintain the current search query (tab index)
             }}

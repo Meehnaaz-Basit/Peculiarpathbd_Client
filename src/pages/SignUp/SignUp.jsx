@@ -4,8 +4,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import useAuth from "../../hooks/useAuth";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 const SignUp = () => {
+  const axiosCommon = useAxiosCommon();
   const navigate = useNavigate();
   const {
     createUser,
@@ -42,8 +44,15 @@ const SignUp = () => {
 
       // 3. Save username and photo in firebase
       await updateUserProfile(name, data.data.display_url);
-      navigate("/");
-      toast.success("Signup Successful");
+
+      // send user to db
+      const userInfo = { name: name, email: email };
+      axiosCommon.post("/users", userInfo).then((res) => {
+        if (res.data.insertedId) {
+          navigate("/");
+          toast.success("Signup Successful, user added");
+        }
+      });
     } catch (err) {
       console.log(err);
       toast.error(err.message);
@@ -51,12 +60,32 @@ const SignUp = () => {
   };
 
   // handle google signin
+  // const handleGoogleSignIn = async () => {
+  //   try {
+  //     await signInWithGoogle();
+
+  //     navigate("/");
+  //     toast.success("Signup Successful");
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast.error(err.message);
+  //   }
+  // };
+
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
+      const result = await signInWithGoogle();
+      const user = result.user;
 
-      navigate("/");
-      toast.success("Signup Successful");
+      // send user to db
+      const userInfo = { name: user.displayName, email: user.email };
+
+      axiosCommon.post("/users", userInfo).then((res) => {
+        if (res.data.insertedId) {
+          navigate("/");
+          toast.success("Signup Successful, user added");
+        }
+      });
     } catch (err) {
       console.log(err);
       toast.error(err.message);
