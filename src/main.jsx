@@ -19,6 +19,9 @@ import DashBoardLayout from "./layouts/DashBoardLayout";
 import Profile from "./Dashboard/Shared/Profile";
 import MyWishlist from "./Dashboard/User/MyWishlist";
 
+import AddPackages from "./Dashboard/Admin/AddPackages";
+import ManageUsers from "./Dashboard/Admin/ManageUsers";
+
 // Create a client
 const queryClient = new QueryClient();
 
@@ -62,12 +65,20 @@ const router = createBrowserRouter([
     element: <DashBoardLayout></DashBoardLayout>,
     children: [
       {
-        path: "/dashboard/myProfile",
+        path: "/dashboard",
         element: <Profile></Profile>,
       },
       {
         path: "/dashboard/myWishlist",
         element: <MyWishlist></MyWishlist>,
+      },
+      {
+        path: "/dashboard/admin/addPackage",
+        element: <AddPackages></AddPackages>,
+      },
+      {
+        path: "/dashboard/admin/manageUser",
+        element: <ManageUsers></ManageUsers>,
       },
     ],
   },

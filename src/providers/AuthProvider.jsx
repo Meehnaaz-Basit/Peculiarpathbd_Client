@@ -69,7 +69,7 @@ const AuthProvider = ({ children }) => {
     return data;
   };
 
-  // onAuthStateChange
+  //onAuthStateChange
   useEffect(() => {
     // Retrieve wishlist data from localStorage
     const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
@@ -86,6 +86,24 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
+  // useEffect(() => {
+  //   // Retrieve wishlist data from localStorage (fallback)
+  //   const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  //   setWishlist(storedWishlist);
+
+  //   const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+  //     setUser(currentUser);
+  //     if (currentUser) {
+  //       // Fetch wishlist data from database using user ID
+  //       const userWishlist = await fetchWishlistFromDatabase(currentUser.uid);
+  //       setWishlist(userWishlist);
+  //     }
+  //     setLoading(false);
+  //   });
+
+  //   return () => unsubscribe();
+  // }, []);
+
   const addToWishlist = (item) => {
     const updatedWishlist = [...wishlist, item];
     setWishlist(updatedWishlist);
@@ -99,6 +117,20 @@ const AuthProvider = ({ children }) => {
     // Save updated wishlist data to localStorage
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
   };
+
+  // const addToWishlist = async (item) => {
+  //   const updatedWishlist = [...wishlist, item];
+  //   setWishlist(updatedWishlist);
+  //   // Update wishlist in database for current user
+  //   await updateWishlistInDatabase(currentUser.uid, updatedWishlist);
+  // };
+
+  // const removeFromWishlist = async (itemId) => {
+  //   const updatedWishlist = wishlist.filter((item) => item._id !== itemId);
+  //   setWishlist(updatedWishlist);
+  //   // Update wishlist in database for current user
+  //   await updateWishlistInDatabase(currentUser.uid, updatedWishlist);
+  // };
 
   const clearWishlist = () => {
     setWishlist([]);

@@ -1,28 +1,28 @@
-import { Link } from "react-router-dom";
-import Button from "../../../../../components/Shared/button/Button";
-import { FaHeart } from "react-icons/fa";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../../../../providers/AuthProvider";
+import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
+import { FaHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import Button from "../Shared/button/Button";
 
-const PackageCard = ({ item }) => {
+const Card = ({ item }) => {
   const { title, spot_image, price, tour_type, _id } = item;
   const { wishlist, addToWishlist, removeFromWishlist } =
     useContext(AuthContext);
   const [isInWishlist, setIsInWishlist] = useState(
-    wishlist.some((wish) => wish._id === _id)
+    wishlist.some((wish) => wish._id === item._id)
   );
 
   const handleToggleWishlist = () => {
     if (isInWishlist) {
-      removeFromWishlist(_id);
+      removeFromWishlist(item._id);
       setIsInWishlist(false);
-      toast.error(`${title} 
+      toast.error(`${item.title} 
        Removed from Wishlist`);
     } else {
       addToWishlist(item);
       setIsInWishlist(true);
-      toast.success(`${title}
+      toast.success(`${item.title}
       Added to Wishlist`);
     }
   };
@@ -60,4 +60,4 @@ const PackageCard = ({ item }) => {
   );
 };
 
-export default PackageCard;
+export default Card;

@@ -1,9 +1,8 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
 import Button from "../Shared/button/Button";
+import Card from "../AllPackages/Card";
 
 const TourTypeCatPage = () => {
   const { tourType } = useParams();
@@ -25,7 +24,7 @@ const TourTypeCatPage = () => {
       <h1>Packages for {tourType}</h1>
       {packages.length > 0 ? (
         <div className="grid lg:grid-cols-3 grid-cols-1 gap-8 ">
-          {packages.map((pkg) => (
+          {/* {packages.map((pkg) => (
             <>
               <div className="card card-compact w-96 bg-base-100 shadow-xl">
                 <figure>
@@ -48,6 +47,9 @@ const TourTypeCatPage = () => {
                 </div>
               </div>
             </>
+          ))} */}
+          {packages.map((item) => (
+            <Card key={item._id} item={item}></Card>
           ))}
         </div>
       ) : (
