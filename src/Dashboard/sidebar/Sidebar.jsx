@@ -7,12 +7,13 @@ import { GrLogout } from "react-icons/gr";
 import { CgProfile } from "react-icons/cg";
 import { RiReservedFill } from "react-icons/ri";
 import { FaHeart, FaHome, FaPlus, FaUser } from "react-icons/fa";
+import useAdmin from "../../hooks/useAdmin";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
   const [isActive, setActive] = useState(false);
 
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
 
   // Sidebar Responsive Handler
   const handleToggle = () => {

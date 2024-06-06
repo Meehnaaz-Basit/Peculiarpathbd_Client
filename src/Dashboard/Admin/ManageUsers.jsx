@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ManageUsers = () => {
-  const axiosCommon = useAxiosCommon();
+  const axiosSecure = useAxiosSecure();
   const {
     data: users = {},
     isLoading,
@@ -12,7 +12,7 @@ const ManageUsers = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await axiosCommon.get("/users");
+      const { data } = await axiosSecure.get("/users");
       //   console.log(data);
       return data;
     },
@@ -29,7 +29,7 @@ const ManageUsers = () => {
       confirmButtonText: "Yes, make Tour Guide!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosCommon
+        axiosSecure
           .patch(`/users/guide/${user._id}`)
           .then((res) => {
             if (res.data.modifiedCount > 0) {
@@ -62,7 +62,7 @@ const ManageUsers = () => {
       confirmButtonText: "Yes, make admin!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosCommon
+        axiosSecure
           .patch(`/users/admin/${user._id}`)
           .then((res) => {
             if (res.data.modifiedCount > 0) {
@@ -84,6 +84,8 @@ const ManageUsers = () => {
       }
     });
   };
+
+  if (isLoading) return "loading ....";
 
   return (
     <div>
