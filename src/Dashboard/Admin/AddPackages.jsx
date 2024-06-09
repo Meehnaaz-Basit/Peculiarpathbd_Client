@@ -3,9 +3,11 @@ import { useRef, useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../components/Loader/Loader";
 
 const AddPackages = () => {
   const formRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
   const axiosCommon = useAxiosCommon();
   const [images, setImages] = useState([""]);
   const [days, setDays] = useState([{ dayNumber: "Day 01", activities: "" }]);
@@ -96,6 +98,7 @@ const AddPackages = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       // Create a new FormData instance to hold the images
@@ -149,8 +152,17 @@ const AddPackages = () => {
       console.log(newItem.data);
 
       if (newItem.data.insertedId) {
+        // Reset form data to initial values
+        setImages([""]);
+        setDays([{ dayNumber: "Day 01", activities: "" }]);
+        setFormData({
+          aboutTour: "",
+          tourType: "",
+          tripTitle: "",
+          price: "",
+        });
         // show success popup
-        formRef.current.reset();
+
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -161,128 +173,142 @@ const AddPackages = () => {
       }
     } catch (error) {
       console.error("Error submitting the form:", error);
+    } finally {
+      setIsLoading(false); // Set loading state back to false
     }
   };
 
   return (
     <div>
       <h2>add packages by admin</h2>
-      <form
-        ref={formRef}
-        onSubmit={handleSubmit}
-        className="p-6 space-y-4 bg-base-200 rounded-lg"
-      >
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Images:</span>
-          </label>
-          {images.map((img, index) => (
-            <div key={index} className="mb-2">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => handleChangeImage(index, e.target.files[0])}
-                className="file-input file-input-bordered w-full"
-              />
+
+      <div>
+        {isLoading ? (
+          <div className="flex justify-center items-center h-screen">
+            {/* <span className="loading loading-bars loading-lg"></span> */}
+            <Loader></Loader>
+          </div>
+        ) : (
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="p-6 space-y-4 bg-base-200 rounded-lg"
+          >
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Images:</span>
+              </label>
+              {images.map((img, index) => (
+                <div key={index} className="mb-2">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) =>
+                      handleChangeImage(index, e.target.files[0])
+                    }
+                    className="file-input file-input-bordered w-full"
+                  />
+                </div>
+              ))}
+              {images.length < 5 && (
+                <button
+                  type="button"
+                  onClick={handleAddImageField}
+                  className="btn btn-outline btn-accent"
+                >
+                  + Add Image
+                </button>
+              )}
             </div>
-          ))}
-          {images.length < 5 && (
-            <button
-              type="button"
-              onClick={handleAddImageField}
-              className="btn btn-outline btn-accent"
-            >
-              + Add Image
-            </button>
-          )}
-        </div>
 
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">About the Tour:</span>
-          </label>
-          <textarea
-            name="aboutTour"
-            value={formData.aboutTour}
-            onChange={handleChange}
-            className="textarea textarea-bordered h-24"
-          />
-        </div>
-
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Tour Plans:</span>
-          </label>
-          {days.map((day, index) => (
-            <div key={index} className="mb-2">
-              <label className="label-text">{day.dayNumber}:</label>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">About the Tour:</span>
+              </label>
               <textarea
-                value={day.activities}
-                onChange={(e) => handleChangeDay(index, e.target.value)}
+                name="aboutTour"
+                value={formData.aboutTour}
+                onChange={handleChange}
                 className="textarea textarea-bordered h-24"
               />
             </div>
-          ))}
-          {days.length < 10 && (
-            <button
-              type="button"
-              onClick={handleAddDayField}
-              className="btn btn-outline btn-accent"
-            >
-              + Add Day
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Tour Plans:</span>
+              </label>
+              {days.map((day, index) => (
+                <div key={index} className="mb-2">
+                  <label className="label-text">{day.dayNumber}:</label>
+                  <textarea
+                    value={day.activities}
+                    onChange={(e) => handleChangeDay(index, e.target.value)}
+                    className="textarea textarea-bordered h-24"
+                  />
+                </div>
+              ))}
+              {days.length < 10 && (
+                <button
+                  type="button"
+                  onClick={handleAddDayField}
+                  className="btn btn-outline btn-accent"
+                >
+                  + Add Day
+                </button>
+              )}
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Tour Type:</span>
+              </label>
+              <select
+                name="tourType"
+                value={formData.tourType}
+                onChange={handleChange}
+                className="select select-bordered"
+              >
+                <option value="">Select</option>
+                <option value="mountain">Mountain</option>
+                <option value="heritage">Heritage</option>
+                <option value="adventure">Adventure</option>
+                <option value="wildlife">Wildlife</option>
+                <option value="beach">Beach</option>
+              </select>
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Trip Title:</span>
+              </label>
+              <input
+                type="text"
+                name="tripTitle"
+                value={formData.tripTitle}
+                onChange={handleChange}
+                className="input input-bordered"
+              />
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Price:</span>
+              </label>
+              <input
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                className="input input-bordered"
+              />
+            </div>
+
+            <button type="submit" className="btn btn-primary mt-4">
+              Submit
             </button>
-          )}
-        </div>
-
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Tour Type:</span>
-          </label>
-          <select
-            name="tourType"
-            value={formData.tourType}
-            onChange={handleChange}
-            className="select select-bordered"
-          >
-            <option value="">Select</option>
-            <option value="mountain">Mountain</option>
-            <option value="heritage">Heritage</option>
-            <option value="adventure">Adventure</option>
-            <option value="wildlife">Wildlife</option>
-            <option value="beach">Beach</option>
-          </select>
-        </div>
-
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Trip Title:</span>
-          </label>
-          <input
-            type="text"
-            name="tripTitle"
-            value={formData.tripTitle}
-            onChange={handleChange}
-            className="input input-bordered"
-          />
-        </div>
-
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Price:</span>
-          </label>
-          <input
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            className="input input-bordered"
-          />
-        </div>
-
-        <button type="submit" className="btn btn-primary mt-4">
-          Submit
-        </button>
-      </form>
+          </form>
+        )}
+      </div>
     </div>
   );
 };

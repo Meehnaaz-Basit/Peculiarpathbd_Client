@@ -1,8 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
-import Button from "../Shared/button/Button";
-import Card from "../AllPackages/Card";
+
+import PackageCard from "../../pages/Home/TabSection/Tab3Items/OurPackage/PackageCard";
 
 const TourTypeCatPage = () => {
   const { tourType } = useParams();
@@ -49,7 +49,7 @@ const TourTypeCatPage = () => {
             </>
           ))} */}
           {packages.map((item) => (
-            <Card key={item._id} item={item}></Card>
+            <PackageCard key={item._id} item={item}></PackageCard>
           ))}
         </div>
       ) : (

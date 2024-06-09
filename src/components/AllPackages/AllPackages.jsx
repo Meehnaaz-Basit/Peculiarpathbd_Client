@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 
-import Card from "./Card";
+import PackageCard from "../../pages/Home/TabSection/Tab3Items/OurPackage/PackageCard";
 
 const AllPackages = () => {
   const axiosCommon = useAxiosCommon();
@@ -9,7 +9,7 @@ const AllPackages = () => {
     queryKey: ["packages"],
     queryFn: async () => {
       const { data } = await axiosCommon.get("/packages");
-      //   console.log(data);
+      console.log(data);
       return data;
     },
   });
@@ -21,7 +21,7 @@ const AllPackages = () => {
       {packages.length}
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 my-12">
         {packages.map((item) => (
-          <Card key={item._id} item={item}></Card>
+          <PackageCard key={item._id} item={item}></PackageCard>
         ))}
       </div>
     </div>

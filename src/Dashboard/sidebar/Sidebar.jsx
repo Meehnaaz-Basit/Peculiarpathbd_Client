@@ -8,12 +8,14 @@ import { CgProfile } from "react-icons/cg";
 import { RiReservedFill } from "react-icons/ri";
 import { FaHeart, FaHome, FaPlus, FaUser } from "react-icons/fa";
 import useAdmin from "../../hooks/useAdmin";
+import useGuide from "../../hooks/useGuide";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
   const [isActive, setActive] = useState(false);
 
   const [isAdmin] = useAdmin();
+  const [isGuide] = useGuide();
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -70,13 +72,13 @@ const Sidebar = () => {
           <div className="flex flex-col justify-between flex-1 mt-6">
             {/* Conditional toggle button here.. */}
 
-            {/*  Menu Items */}
             <nav>
               {isAdmin ? (
                 <>
+                  {/* Admin Items */}
                   {/* Statistics */}
                   <NavLink
-                    to="/dashboard"
+                    to="/dashboard/myProfile"
                     end
                     className={({ isActive }) =>
                       `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
@@ -122,9 +124,44 @@ const Sidebar = () => {
                     <span className="mx-4 font-medium">Manage User</span>
                   </NavLink>
                 </>
+              ) : isGuide ? (
+                <>
+                  {/* Guide Items */}
+                  <NavLink
+                    to="/dashboard/myProfile"
+                    end
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                        isActive
+                          ? "bg-gray-300  text-gray-700"
+                          : "text-gray-600"
+                      }`
+                    }
+                  >
+                    <CgProfile className="w-5 h-5" />
+
+                    <span className="mx-4 font-medium">My Profile</span>
+                  </NavLink>
+
+                  <NavLink
+                    to="/dashboard/guide/myAssignTours"
+                    end
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                        isActive
+                          ? "bg-gray-300  text-gray-700"
+                          : "text-gray-600"
+                      }`
+                    }
+                  >
+                    <CgProfile className="w-5 h-5" />
+
+                    <span className="mx-4 font-medium">My Assigned Tours </span>
+                  </NavLink>
+                </>
               ) : (
                 <>
-                  {/* Statistics */}
+                  {/* User Items */}
                   <NavLink
                     to="/dashboard/myProfile"
                     end
@@ -189,6 +226,125 @@ const Sidebar = () => {
                 </>
               )}
             </nav>
+
+            {/*  Menu Items */}
+            {/* <nav>
+              {isAdmin ? (
+                <>
+                 
+                  <NavLink
+                    to="/dashboard"
+                    end
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                        isActive
+                          ? "bg-gray-300  text-gray-700"
+                          : "text-gray-600"
+                      }`
+                    }
+                  >
+                    <CgProfile className="w-5 h-5" />
+
+                    <span className="mx-4 font-medium">My Profile</span>
+                  </NavLink>
+
+                
+                  <NavLink
+                    to="/dashboard/admin/addPackage"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                        isActive
+                          ? "bg-gray-300  text-gray-700"
+                          : "text-gray-600"
+                      }`
+                    }
+                  >
+                    <FaPlus className="w-5 h-5" />
+
+                    <span className="mx-4 font-medium">Add Packages</span>
+                  </NavLink>
+                  
+                  <NavLink
+                    to="/dashboard/admin/manageUser"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                        isActive
+                          ? "bg-gray-300  text-gray-700"
+                          : "text-gray-600"
+                      }`
+                    }
+                  >
+                    <FaUser className="w-5 h-5" />
+
+                    <span className="mx-4 font-medium">Manage User</span>
+                  </NavLink>
+                </>
+              ) : (
+                <>
+                  <NavLink
+                    to="/dashboard/myProfile"
+                    end
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                        isActive
+                          ? "bg-gray-300  text-gray-700"
+                          : "text-gray-600"
+                      }`
+                    }
+                  >
+                    <CgProfile className="w-5 h-5" />
+
+                    <span className="mx-4 font-medium">My Profile</span>
+                  </NavLink>
+
+                  
+                  <NavLink
+                    to="myBookings"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                        isActive
+                          ? "bg-gray-300  text-gray-700"
+                          : "text-gray-600"
+                      }`
+                    }
+                  >
+                    <RiReservedFill className="w-5 h-5" />
+
+                    <span className="mx-4 font-medium">My Bookings</span>
+                  </NavLink>
+                 
+                  <NavLink
+                    to="/dashboard/myWishlist"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                        isActive
+                          ? "bg-gray-300  text-gray-700"
+                          : "text-gray-600"
+                      }`
+                    }
+                  >
+                    <FaHeart className="w-5 h-5" />
+
+                    <span className="mx-4 font-medium">My Wishlist</span>
+                  </NavLink>
+                 
+                  <NavLink
+                    to="requestAdmin"
+                    className={({ isActive }) =>
+                      `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                        isActive
+                          ? "bg-gray-300  text-gray-700"
+                          : "text-gray-600"
+                      }`
+                    }
+                  >
+                    <BsSendFill className="w-5 h-5" />
+
+                    <span className="mx-4 font-medium">Request Admin</span>
+                  </NavLink>
+                </>
+              )}
+            </nav> */}
           </div>
         </div>
 

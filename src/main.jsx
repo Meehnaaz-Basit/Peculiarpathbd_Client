@@ -21,6 +21,11 @@ import MyWishlist from "./Dashboard/User/MyWishlist";
 
 import AddPackages from "./Dashboard/Admin/AddPackages";
 import ManageUsers from "./Dashboard/Admin/ManageUsers";
+import GuideAssignTours from "./Dashboard/Guide/GuideAssignTours";
+import AdminRoute from "./components/Routes/AdminRoute";
+import UserProfile from "./Dashboard/User/UserProfile";
+import StoryDetail from "./pages/Home/TouristStory/StoryDetail";
+import AllStories from "./pages/Home/TouristStory/AllStories";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -58,6 +63,14 @@ const router = createBrowserRouter([
         path: "/packages/tour-type/:tourType",
         element: <TourTypeCatPage></TourTypeCatPage>,
       },
+      {
+        path: "/usersStory",
+        element: <AllStories></AllStories>,
+      },
+      {
+        path: "/usersStory/:id",
+        element: <StoryDetail></StoryDetail>,
+      },
     ],
   },
   {
@@ -65,9 +78,10 @@ const router = createBrowserRouter([
     element: <DashBoardLayout></DashBoardLayout>,
     children: [
       {
-        path: "/dashboard",
+        path: "/dashboard/myProfile",
         element: <Profile></Profile>,
       },
+
       {
         path: "/dashboard/myWishlist",
         element: <MyWishlist></MyWishlist>,
@@ -78,7 +92,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/admin/manageUser",
-        element: <ManageUsers></ManageUsers>,
+        element: (
+          <AdminRoute>
+            <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/guide/myAssignTours",
+        element: <GuideAssignTours></GuideAssignTours>,
       },
     ],
   },
