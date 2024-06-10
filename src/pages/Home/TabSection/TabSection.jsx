@@ -4,6 +4,7 @@ import OurPackages from "./Tab3Items/OurPackage/OurPackages";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import OurGuideTab from "./Tab3Items/MeetOurGuides/OurGuideTab";
+import OverView from "./Tab3Items/Overview/OverView";
 const TabSection = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const TabSection = () => {
           </TabList>
 
           <TabPanel>
-            <h2>Any content 1</h2>
+            <OverView></OverView>
           </TabPanel>
           <TabPanel>
             <OurPackages></OurPackages>

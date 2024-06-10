@@ -14,7 +14,7 @@ const PackageCard = ({ item }) => {
           <img
             className="hover:scale-125 w-full transition-all overflow-hidden h-60 object-cover"
             src={firstImage}
-            alt="Shoes"
+            alt={title}
           />
         </figure>
         <p className="absolute bg-pink-600 text-white">{price}</p>
