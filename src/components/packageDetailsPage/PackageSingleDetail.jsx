@@ -11,6 +11,7 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import Loader from "../Loader/Loader";
+import Swal from "sweetalert2";
 
 const PackageSingleDetail = () => {
   const { user } = useContext(AuthContext);
@@ -71,9 +72,21 @@ const PackageSingleDetail = () => {
         date,
         tourGuide,
       };
-      console.log(bookings);
+      // console.log(bookings);
       // Simulate a booking API call
-      //  await axiosCommon.post("/bookings", bookings);
+      const newBooking = await axiosCommon.post("/bookings", bookings);
+      if (newBooking.data.insertedId) {
+        // show success popup
+
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Booked Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        form.reset();
+      }
     } catch (error) {
       console.error("Booking failed:", error);
     } finally {
