@@ -26,6 +26,7 @@ import AdminRoute from "./components/Routes/AdminRoute";
 import UserProfile from "./Dashboard/User/UserProfile";
 import StoryDetail from "./pages/Home/TouristStory/StoryDetail";
 import AllStories from "./pages/Home/TouristStory/AllStories";
+import MyBookings from "./Dashboard/User/MyBookings";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/myWishlist",
         element: <MyWishlist></MyWishlist>,
+      },
+      {
+        path: "/dashboard/myBookings/:email",
+        element: <MyBookings></MyBookings>,
       },
       {
         path: "/dashboard/admin/addPackage",

@@ -11,7 +11,7 @@ import useAdmin from "../../hooks/useAdmin";
 import useGuide from "../../hooks/useGuide";
 
 const Sidebar = () => {
-  const { logOut } = useAuth();
+  const { logOut, user } = useAuth();
   const [isActive, setActive] = useState(false);
 
   const [isAdmin] = useAdmin();
@@ -178,9 +178,9 @@ const Sidebar = () => {
                     <span className="mx-4 font-medium">My Profile</span>
                   </NavLink>
 
-                  {/* Add Room */}
+                  {/* booking */}
                   <NavLink
-                    to="myBookings"
+                    to={`/dashboard/myBookings/${user?.email}`}
                     className={({ isActive }) =>
                       `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
                         isActive

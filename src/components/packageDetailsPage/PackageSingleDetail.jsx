@@ -295,7 +295,7 @@ const PackageSingleDetail = () => {
                     name="name"
                     className="input input-bordered"
                     required
-                    defaultValue={user.displayName}
+                    defaultValue={user?.displayName}
                     disabled
                   />
                 </div>
@@ -310,7 +310,7 @@ const PackageSingleDetail = () => {
                     name="email"
                     className="input input-bordered"
                     required
-                    defaultValue={user.email}
+                    defaultValue={user?.email}
                     disabled
                   />
                 </div>
@@ -325,7 +325,7 @@ const PackageSingleDetail = () => {
                     name="image"
                     className="input input-bordered"
                     required
-                    defaultValue={user.photoURL}
+                    defaultValue={user?.photoURL}
                     disabled
                   />
                 </div>
