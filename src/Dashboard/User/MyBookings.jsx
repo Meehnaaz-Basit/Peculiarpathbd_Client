@@ -7,7 +7,11 @@ import Loader from "../../components/Loader/Loader";
 const MyBookings = () => {
   const { user } = useAuth();
   const axiosCommon = useAxiosCommon();
-  const { data: bookings = {}, isLoading } = useQuery({
+  const {
+    data: bookings = {},
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["bookings"],
     queryFn: async () => {
       const { data } = await axiosCommon.get(`/bookings/${user.email}`);
@@ -27,7 +31,9 @@ const MyBookings = () => {
           {/* {bookings.map((booking) => (
             <BookingTable booking={booking} key={booking._id}></BookingTable>
           ))} */}
-          <BookingTable bookings={bookings}> </BookingTable>
+          <BookingTable bookings={bookings} refetch={refetch}>
+            {" "}
+          </BookingTable>
         </>
       )}
     </div>

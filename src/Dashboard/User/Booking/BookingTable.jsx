@@ -5,17 +5,39 @@ import {
   getPaginationRowModel,
 } from "@tanstack/react-table";
 
-const BookingTable = ({ bookings }) => {
-  // console.log(bookings, "data");
-  // const table = useReactTable({ data, column });
+import Swal from "sweetalert2";
+import useAxiosCommon from "../../../hooks/useAxiosCommon";
 
-  // {"_id":"6666b31da992650cf996662e"},
-  //   "name":"user2",
-  // "email":"user2@gmail.com",
-  // "image":"https://i.ibb.co/nj3mxDV/6769264-60111.jpg",
-  // "packageName":"Mountain Adventure Tour",
-  // "price":"1200","date":"06/26/2024",
-  // "tourGuide":"Rahim Khan, rahim.khan@example.com"}
+const BookingTable = ({ bookings, refetch }) => {
+  // console.log(bookings, "data");
+  const axiosCommon = useAxiosCommon();
+
+  const renderActionButtons = (id, status) => {
+    if (status === "In Review" || status === "Rejected") {
+      return (
+        <button onClick={() => handleCancel(id)} className="btn btn-sm">
+          Cancel
+        </button>
+      );
+    } else if (status === "Accepted") {
+      return <button className="btn btn-sm">Pay</button>;
+    } else {
+      return null; // No action button for other statuses
+    }
+  };
+
+  const getStatusClasses = (status) => {
+    switch (status) {
+      case "In Review":
+        return "text-yellow-600 font-semibold bg-yellow-100 rounded-lg";
+      case "Rejected":
+        return "text-red-600 bg-red-100 font-semibold rounded-lg";
+      case "Accepted":
+        return "text-green-600 bg-green-100 font-semibold rounded-lg";
+      default:
+        return "";
+    }
+  };
 
   const data = bookings || [];
   console.log(data, "table data");
@@ -47,11 +69,19 @@ const BookingTable = ({ bookings }) => {
     },
     {
       header: "Status",
-      // accessorKey: "price",
+      // accessorKey: "status",
+      cell: ({ cell }) => {
+        const status = cell.row.original.status;
+        const statusClasses = getStatusClasses(status);
+        return <span className={`py-1 px-2 ${statusClasses}`}>{status}</span>;
+      },
     },
     {
       header: "Action",
-      // accessorKey: "price",
+      cell: ({ cell }) => {
+        const { _id: id, status } = cell.row.original; // Assuming _id is the ID field
+        return renderActionButtons(id, status);
+      },
     },
   ];
 
@@ -61,6 +91,47 @@ const BookingTable = ({ bookings }) => {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
+
+  const handleCancel = (id) => {
+    Swal.fire({
+      title: "Do you want to cancel?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Cancel!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosCommon.delete(`/bookings/${id}`);
+          console.log("Delete response:", res.data); // Log the response data
+          if (res.data && res.data.deletedCount > 0) {
+            refetch(); // Assuming refetch is a function passed as a prop to fetch updated data
+            Swal.fire({
+              title: "Canceled",
+              text: "The booking has been canceled.",
+              icon: "success",
+            });
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: "No booking was deleted.",
+              icon: "error",
+            });
+          }
+        } catch (error) {
+          console.error("Error cancelling booking:", error);
+          Swal.fire({
+            title: "Error!",
+            text: "An error occurred while cancelling the booking.",
+            icon: "error",
+          });
+        }
+      }
+    });
+  };
+
   return (
     <div>
       <div className="overflow-x-auto">
