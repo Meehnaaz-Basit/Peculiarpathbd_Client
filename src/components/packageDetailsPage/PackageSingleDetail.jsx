@@ -2,20 +2,20 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "./../../hooks/useAxiosCommon";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import ListGuide from "./ListGuide";
-import { AuthContext } from "../../providers/AuthProvider";
 
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import Loader from "../Loader/Loader";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const PackageSingleDetail = () => {
-  const { user } = useContext(AuthContext);
-  console.log(user);
+  const { user } = useAuth();
+  console.log(user, "user in package detail page");
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -73,7 +73,7 @@ const PackageSingleDetail = () => {
         tourGuide,
       };
       // console.log(bookings);
-      // Simulate a booking API call
+      //
       const newBooking = await axiosCommon.post("/bookings", bookings);
       if (newBooking.data.insertedId) {
         // show success popup
@@ -277,7 +277,7 @@ const PackageSingleDetail = () => {
         {/* tour guide list */}
         {/* booking form */}
         <div>
-          <div className=" p-4 shadow-lg max-w-lg mx-auto">
+          <div className="p-4 shadow-lg max-w-lg mx-auto">
             {loading ? (
               <div className="flex justify-center items-center h-screen">
                 <Loader></Loader>
@@ -382,21 +382,21 @@ const PackageSingleDetail = () => {
                     className="select select-bordered"
                     required
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled>
                       Select a tour guide
                     </option>
                     {tourGuides.map((guide) => (
                       <option
                         key={guide.id}
-                        value={`${guide.name}, ${guide.contactDetails.email}`}
+                        value={`${guide.name}, ${guide.email}`}
                       >
-                        {guide.name} ({guide.contactDetails.email})
+                        {guide.name} ({guide.email})
                       </option>
                     ))}
                   </select>
                 </div>
 
-                {/*  */}
+                {/* Submit button */}
                 <div className="form-control mt-6">
                   <button className="btn btn-primary">Book Now</button>
                 </div>
@@ -404,6 +404,7 @@ const PackageSingleDetail = () => {
             )}
           </div>
         </div>
+
         {/* booking form */}
       </div>
       <button className="btn btn-secondary" onClick={handleBackClick}>

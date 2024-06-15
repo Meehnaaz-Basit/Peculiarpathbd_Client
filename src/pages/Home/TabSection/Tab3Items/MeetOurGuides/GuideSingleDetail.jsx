@@ -12,7 +12,7 @@ const GuideSingleDetail = () => {
     queryKey: ["tourGuides", id],
     queryFn: async () => {
       const { data } = await axiosCommon.get(`/tourGuides/${id}`);
-      //   console.log(data);
+      console.log(data);
       return data;
     },
   });
@@ -21,32 +21,33 @@ const GuideSingleDetail = () => {
 
   return (
     <div>
-      <h2>details {tourGuide.name}</h2>
-      <div>
-        <div className="container mx-auto my-4 p-4 bg-white shadow rounded">
-          <div className="flex flex-col md:flex-row">
-            <figure>
-              <img
-                className="w-48 h-48 rounded-full mx-auto md:mx-0 object-cover"
-                src={tourGuide.profilePicture || defaultImageUrl}
-                alt={tourGuide.name}
-                onError={(e) => {
-                  if (e.target.alt === tourGuide.name) {
-                    e.target.src = defaultImageUrl;
-                  }
-                }}
-              />
-            </figure>
-            <div className="md:ml-6 mt-4 md:mt-0">
-              <h1 className="text-2xl font-bold">{tourGuide.name}</h1>
-              <p>Email: {tourGuide.contactDetails.email}</p>
-              <p>Phone: {tourGuide.contactDetails.phone}</p>
-              <p>Address: {tourGuide.contactDetails.address}</p>
-            </div>
-          </div>
+      {/* <h2>Details: {tourGuide.name}</h2> */}
 
-          <div className="mt-6">
-            <h2 className="text-xl font-semibold">Education</h2>
+      <div className="container max-w-3xl mx-auto my-4 p-6 bg-white shadow-lg rounded">
+        <div className="flex flex-col justify-center md:flex-row">
+          <figure>
+            <img
+              className="w-48 h-48 rounded-full mx-auto md:mx-0 object-cover"
+              src={tourGuide.guide_image || defaultImageUrl}
+              alt={tourGuide.name}
+              onError={(e) => {
+                if (e.target.alt === tourGuide.name) {
+                  e.target.src = defaultImageUrl;
+                }
+              }}
+            />
+          </figure>
+          <div className="md:ml-6 mt-4 md:mt-0">
+            <h1 className="text-2xl font-bold">{tourGuide.name}</h1>
+            <p>Email: {tourGuide.email}</p>
+            <p>Phone: {tourGuide.contact?.number || "No details yet"}</p>
+            <p>Address: {tourGuide.contact?.address || "No details yet"}</p>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <h2 className="text-xl font-semibold">Education</h2>
+          {tourGuide.education && tourGuide.education.length > 0 ? (
             <ul className="list-disc list-inside">
               {tourGuide.education.map((edu, index) => (
                 <li key={index}>
@@ -54,20 +55,28 @@ const GuideSingleDetail = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          ) : (
+            <p>No details yet</p>
+          )}
+        </div>
 
-          <div className="mt-6">
-            <h2 className="text-xl font-semibold">Skills</h2>
+        <div className="mt-6">
+          <h2 className="text-xl font-semibold">Skills</h2>
+          {tourGuide.skills && tourGuide.skills.length > 0 ? (
             <ul className="list-disc list-inside">
               {tourGuide.skills.map((skill, index) => (
                 <li key={index}>{skill}</li>
               ))}
             </ul>
-          </div>
+          ) : (
+            <p>No details yet</p>
+          )}
+        </div>
 
-          <div className="mt-6">
-            <h2 className="text-xl font-semibold">Work Experience</h2>
-            {tourGuide.workExperience.map((work, index) => (
+        <div className="mt-6">
+          <h2 className="text-xl font-semibold">Work Experience</h2>
+          {tourGuide.workExperience && tourGuide.workExperience.length > 0 ? (
+            tourGuide.workExperience.map((work, index) => (
               <div key={index} className="mb-4">
                 <h3 className="font-bold">{work.position}</h3>
                 <p>{work.company}</p>
@@ -78,24 +87,10 @@ const GuideSingleDetail = () => {
                   ))}
                 </ul>
               </div>
-            ))}
-          </div>
-
-          <div className="mt-6">
-            <h2 className="text-xl font-semibold">Reviews</h2>
-            {tourGuide.reviews && tourGuide.reviews.length > 0 ? (
-              tourGuide.reviews.map((review, index) => (
-                <div key={index} className="mb-4 p-4 border rounded">
-                  <h3 className="font-bold">{review.user}</h3>
-                  <p>Rating: {review.rating}/5</p>
-                  <p>{review.comment}</p>
-                  <p className="text-gray-600 text-sm">{review.date}</p>
-                </div>
-              ))
-            ) : (
-              <p>No reviews yet.</p>
-            )}
-          </div>
+            ))
+          ) : (
+            <p>No details yet</p>
+          )}
         </div>
       </div>
     </div>

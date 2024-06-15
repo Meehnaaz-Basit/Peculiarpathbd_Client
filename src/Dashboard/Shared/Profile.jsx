@@ -1,6 +1,7 @@
 import useAdmin from "../../hooks/useAdmin";
 import useAuth from "../../hooks/useAuth";
 import useGuide from "../../hooks/useGuide";
+import GuideProfileForm from "./GuideProfileForm";
 import UserProfileForm from "./UserProfileForm";
 
 const Profile = () => {
@@ -40,6 +41,7 @@ const Profile = () => {
       {/* user form */}
 
       {!isAdmin && !isGuide && <UserProfileForm user={user}></UserProfileForm>}
+      {isGuide && <GuideProfileForm user={user}></GuideProfileForm>}
 
       {/* guide form */}
     </div>

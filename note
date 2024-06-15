@@ -1,0 +1,118 @@
+<div>
+  <div className=" p-4 shadow-lg max-w-lg mx-auto">
+    {loading ? (
+    <div className="flex justify-center items-center h-screen">
+      <Loader></Loader>
+    </div>
+    ) : (
+    <form onSubmit="{handleBooking}" className="card-body">
+      {/* name */}
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Name</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Name"
+          name="name"
+          className="input input-bordered"
+          required
+          defaultValue="{user?.displayName}"
+          disabled
+        />
+      </div>
+      {/* email */}
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Email</span>
+        </label>
+        <input
+          type="email"
+          placeholder="email"
+          name="email"
+          className="input input-bordered"
+          required
+          defaultValue="{user?.email}"
+          disabled
+        />
+      </div>
+      {/* image */}
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Picture</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Image"
+          name="image"
+          className="input input-bordered"
+          required
+          defaultValue="{user?.photoURL}"
+          disabled
+        />
+      </div>
+      {/* package name */}
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Package Name</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Package Name"
+          name="packageName"
+          className="input input-bordered"
+          required
+          defaultValue="{packages.title}"
+          disabled
+        />
+      </div>
+      {/* price */}
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Price</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Price"
+          name="price"
+          className="input input-bordered"
+          required
+          defaultValue="{packages.price}"
+          disabled
+        />
+      </div>
+      {/* tour date */}
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Tour Date</span>
+        </label>
+        <DatePicker selected={startDate} name="date" onChange={(date) =>
+        setStartDate(date)} className="input input-bordered" required />
+      </div>
+      {/* tour guide name - drop-down */}
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Tour Guide</span>
+        </label>
+        <select name="tourGuide" className="select select-bordered" required>
+          <option value="" disabled selected>Select a tour guide</option>
+          {tourGuides.map((guide) => (
+          <option
+            key="{guide.id}"
+            value="{`${guide.name},"
+            ${guide.contactDetails.email}`}
+          >
+            {guide.name} ({guide.contactDetails.email})
+          </option>
+          ))}
+        </select>
+      </div>
+
+      {/* */}
+      <div className="form-control mt-6">
+        <button className="btn btn-primary">Book Now</button>
+      </div>
+    </form>
+    )}
+  </div>
+</div>

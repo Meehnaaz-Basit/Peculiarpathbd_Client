@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import Button from "../../../../../components/Shared/button/Button";
 
 const OurGuideTabCard = ({ tourGuide }) => {
-  const { _id, name, profilePicture, contactDetails } = tourGuide;
-  const email = contactDetails?.email || "No email available";
+  // const { user } = useAuth();
+  const { _id, name, email, guide_image } = tourGuide;
+  // const email = email || "No email available";
 
   const defaultImageUrl = "https://i.ibb.co/94MhXkN/6769264-60111.jpg";
   return (
@@ -12,7 +13,7 @@ const OurGuideTabCard = ({ tourGuide }) => {
         <figure className="px-10 pt-10">
           <img
             className=" overflow-hidden h-60 object-cover rounded-lg"
-            src={profilePicture || defaultImageUrl}
+            src={guide_image || defaultImageUrl}
             alt={name}
             onError={(e) => {
               if (e.target.alt === name) {
