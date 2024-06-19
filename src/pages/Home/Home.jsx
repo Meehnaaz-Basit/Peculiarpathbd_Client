@@ -1,3 +1,4 @@
+import Slider from "./Slider";
 import TabSection from "./TabSection/TabSection";
 import TourTypeSection from "./TourType/TourTypeSection";
 import StorySection from "./TouristStory/StorySection";
@@ -5,8 +6,8 @@ import StorySection from "./TouristStory/StorySection";
 const Home = () => {
   return (
     <div>
-      <h2>this is home</h2>
       {/* slider/banner */}
+      <Slider></Slider>
       {/* tourist and travel guide */}
       <TabSection></TabSection>
       <div className="py-20">

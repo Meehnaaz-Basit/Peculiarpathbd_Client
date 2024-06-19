@@ -27,6 +27,9 @@ import UserProfile from "./Dashboard/User/UserProfile";
 import StoryDetail from "./pages/Home/TouristStory/StoryDetail";
 import AllStories from "./pages/Home/TouristStory/AllStories";
 import MyBookings from "./Dashboard/User/MyBookings";
+import Blog from "./pages/Blog/Blog";
+import Contact from "./pages/contact/Contact";
+import Request from "./Dashboard/User/Request";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -39,6 +42,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/blogs",
+        element: <Blog></Blog>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
       },
       {
         path: "/login",
@@ -90,6 +101,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/myBookings/:email",
         element: <MyBookings></MyBookings>,
+      },
+      {
+        path: "/dashboard/request/",
+        element: <Request></Request>,
       },
       {
         path: "/dashboard/admin/addPackage",

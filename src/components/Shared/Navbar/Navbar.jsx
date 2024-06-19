@@ -15,8 +15,8 @@ const Navbar = () => {
         to="/"
         className={({ isActive }) =>
           isActive
-            ? " border-b-2 border-teal-700 text-teal-600 bg-transparent py-2 px-3 mx-2  font-bold"
-            : "border-b-2 border-transparent  py-2 px-3 mx-2 font-bold hover:border-teal-600 hover:text-teal-600 hover:bg-transparent transition-all"
+            ? " border-b-2 border-teal-700 text-teal-500 bg-transparent py-2 px-3 mx-2  font-bold"
+            : "border-b-2 border-transparent  py-2 px-3 mx-2 font-bold hover:border-teal-500 hover:text-teal-500 hover:bg-transparent transition-all"
         }
       >
         Home
@@ -25,8 +25,8 @@ const Navbar = () => {
         to="/community"
         className={({ isActive }) =>
           isActive
-            ? " border-b-2 border-teal-700 text-teal-600 bg-transparent py-2 px-3 mx-2  font-bold"
-            : "border-b-2 border-transparent  py-2 px-3 mx-2 font-bold  hover:text-teal-600 hover:bg-transparent transition-all"
+            ? " border-b-2 border-teal-700 text-teal-500 bg-transparent py-2 px-3 mx-2  font-bold"
+            : "border-b-2 border-transparent  py-2 px-3 mx-2 font-bold  hover:text-teal-500 hover:bg-transparent transition-all"
         }
       >
         Community
@@ -36,8 +36,8 @@ const Navbar = () => {
         to="/blogs"
         className={({ isActive }) =>
           isActive
-            ? " border-b-2 border-teal-700 text-teal-600 bg-transparent py-2 px-3 mx-2  font-bold"
-            : "border-b-2 border-transparent  py-2 px-3 mx-2 font-bold  hover:text-teal-600 hover:bg-transparent transition-all"
+            ? " border-b-2 border-teal-700 text-teal-500 bg-transparent py-2 px-3 mx-2  font-bold"
+            : "border-b-2 border-transparent  py-2 px-3 mx-2 font-bold  hover:text-teal-500 hover:bg-transparent transition-all"
         }
       >
         Blogs
@@ -46,8 +46,8 @@ const Navbar = () => {
         to="/about"
         className={({ isActive }) =>
           isActive
-            ? " border-b-2 border-teal-700 text-teal-600 bg-transparent py-2 px-3 mx-2  font-bold"
-            : "border-b-2 border-transparent  py-2 px-3 mx-2 font-bold  hover:text-teal-600 hover:bg-transparent transition-all"
+            ? " border-b-2 border-teal-700 text-teal-500 bg-transparent py-2 px-3 mx-2  font-bold"
+            : "border-b-2 border-transparent  py-2 px-3 mx-2 font-bold  hover:text-teal-500 hover:bg-transparent transition-all"
         }
       >
         About Us
@@ -57,8 +57,8 @@ const Navbar = () => {
         to="/contact"
         className={({ isActive }) =>
           isActive
-            ? " border-b-2 border-teal-700 text-teal-600 bg-transparent py-2 px-3 mx-2  font-bold"
-            : "border-b-2 border-transparent  py-2 px-3 mx-2 font-bold  hover:text-teal-600 hover:bg-transparent transition-all"
+            ? " border-b-2 border-teal-700 text-teal-500 bg-transparent py-2 px-3 mx-2  font-bold"
+            : "border-b-2 border-transparent  py-2 px-3 mx-2 font-bold  hover:text-teal-500 hover:bg-transparent transition-all"
         }
       >
         Contact
@@ -69,7 +69,7 @@ const Navbar = () => {
   return (
     <div>
       {/* ****** */}
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 px-0">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -95,7 +95,12 @@ const Navbar = () => {
               {navRoute}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">PeculiarPathsBD</a>
+          <a
+            href="/"
+            className=" lg:text-4xl text-2xl font-bold font-pacifico text-teal-500"
+          >
+            PeculiarBD
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navRoute}</ul>
@@ -169,7 +174,7 @@ const Navbar = () => {
           {/* ======== */}
           {user ? (
             <>
-              <div>
+              {/* <div>
                 {user.photoURL ? (
                   <img
                     className="md:w-14 md:h-14 w-10 h-10 rounded-full border-2 object-cover "
@@ -187,7 +192,42 @@ const Navbar = () => {
               </div>
               <div>
                 <button onClick={logOut}>logOut</button>
-              </div>
+              </div> */}
+              {/*  */}
+              <details className="dropdown dropdown-bottom dropdown-end z-30">
+                <summary className="block py-2 ">
+                  <div>
+                    {user.photoURL ? (
+                      <img
+                        className="md:w-14 md:h-14 w-10 h-10 rounded-full border-2 object-cover "
+                        title={user.displayName}
+                        src={user.photoURL}
+                        alt="Profile"
+                      />
+                    ) : (
+                      <img
+                        className="md:w-14 md:h-14 w-10 h-10 rounded-full border-2  object-cover "
+                        src="https://i.ibb.co/X3yrLFJ/pngegg.png"
+                        alt=""
+                      />
+                    )}
+                  </div>
+                </summary>
+                <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                  <li>
+                    <a className="disabled">{user?.displayName}</a>
+                  </li>
+                  <li>
+                    <a>{user?.email}</a>
+                  </li>
+                  <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li>
+                    <button onClick={logOut}>Log Out</button>
+                  </li>
+                </ul>
+              </details>
             </>
           ) : (
             <>

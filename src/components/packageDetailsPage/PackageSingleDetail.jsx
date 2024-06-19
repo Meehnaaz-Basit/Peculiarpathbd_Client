@@ -12,6 +12,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Loader from "../Loader/Loader";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import { FaArrowAltCircleLeft, FaHeart } from "react-icons/fa";
 
 const PackageSingleDetail = () => {
   const { user } = useAuth();
@@ -106,7 +107,13 @@ const PackageSingleDetail = () => {
 
   return (
     <div className="max-w-6xl mx-auto shadow-lg px-4 py-8">
-      <h2>{packages.title}</h2>
+      <div className="flex justify-between py-4 px-12">
+        <h2 className="text-teal-500 font-pacifico text-2xl capitalize font-bold">
+          {packages.title}
+        </h2>
+        <FaHeart className="text-xl"></FaHeart>
+      </div>
+
       {/*  */}
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-wrap gap-4">
@@ -242,11 +249,16 @@ const PackageSingleDetail = () => {
       {/*  */}
       <div className="max-w-4xl mx-auto">
         <div className="my-8">
-          <h2 className="font-bold mb-6">About</h2>
+          <h2 className="font-bold mb-6 text-teal-500 font-pacifico text-xl underline">
+            About
+          </h2>
           <p>{packages.aboutTour}</p>
         </div>
+        {/* tour plan */}
         <div>
-          <h2 className="font-bold mb-6">Tour plans: </h2>
+          <h2 className="font-bold mb-6 text-teal-500 font-pacifico text-xl underline">
+            Tour plans:{" "}
+          </h2>
           {/* Days */}
           <div className="max-w-4xl mx-auto">
             {/* Map through days to render each day */}
@@ -256,7 +268,7 @@ const PackageSingleDetail = () => {
                 className="flex flex-row bg-white rounded-lg shadow-md border border-gray-200 mb-4"
               >
                 {/* Day Number with Blue Background */}
-                <div className="bg-blue-500 text-white py-2 px-4 ">
+                <div className="bg-teal-500 text-white py-2 px-4 ">
                   {day.dayNumber}
                 </div>
 
@@ -271,12 +283,17 @@ const PackageSingleDetail = () => {
         </div>
         {/* tour guide list */}
         <div className="py-8">
-          <h2 className="font-bold mb-6">Tour Guide Lists</h2>
+          <h2 className="font-bold mb-6 text-teal-500 font-pacifico text-xl underline">
+            Tour Guide Lists
+          </h2>
           <ListGuide></ListGuide>
         </div>
         {/* tour guide list */}
         {/* booking form */}
         <div>
+          <h2 className="font-bold mb-6 text-teal-500 font-pacifico text-xl text-center mt-4 underline">
+            Booking Form
+          </h2>
           <div className="p-4 shadow-lg max-w-lg mx-auto">
             {loading ? (
               <div className="flex justify-center items-center h-screen">
@@ -398,7 +415,9 @@ const PackageSingleDetail = () => {
 
                 {/* Submit button */}
                 <div className="form-control mt-6">
-                  <button className="btn btn-primary">Book Now</button>
+                  <button className="btn bg-teal-500 text-white">
+                    Book Now
+                  </button>
                 </div>
               </form>
             )}
@@ -407,9 +426,12 @@ const PackageSingleDetail = () => {
 
         {/* booking form */}
       </div>
-      <button className="btn btn-secondary" onClick={handleBackClick}>
-        back
-      </button>
+      <div className="flex gap-3 items-center text-teal-500">
+        <FaArrowAltCircleLeft></FaArrowAltCircleLeft>
+        <button className="underline" onClick={handleBackClick}>
+          Back
+        </button>
+      </div>
     </div>
   );
 };

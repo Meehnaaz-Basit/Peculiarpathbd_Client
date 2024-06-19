@@ -16,27 +16,47 @@ const StorySection = () => {
     },
   });
 
+  if (isLoading || !stories.length) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <div className="py-20">
-      <h2>this is story section</h2>
-      <div className="grid grid-cols-4 gap-6 mt-10">
-        {isLoading ? (
-          <div className="flex justify-center items-center h-min">
-            <Loader></Loader>
-          </div>
-        ) : (
-          stories
-            .slice(0, 4)
-            .map((story) => (
-              <FourStoryCart story={story} key={story._id}></FourStoryCart>
-            ))
-        )}
+      <div className=" text-center">
+        <h2 className="font-bold font-pacifico text-3xl text-teal-500">
+          Tourist Stories
+        </h2>
       </div>
-      <div className="flex justify-center mt-20">
-        <Link to="/usersStory">
-          <Button buttonText="All Stories"></Button>
-        </Link>
+
+      <div className=" p-8 max-w-6xl mx-auto shadow-lg">
+        <div className=" flex flex-col items-center text-center justify-center space-y-6 ">
+          <h1 className="font-pacifico text-teal-500 font-bold text-3xl">
+            Moments of Our Satisfied Tourist
+          </h1>
+          <p>
+            Experience the magic of our destinations through the eyes of our
+            satisfied travelers. From breathtaking landscapes to culturally rich
+            experiences, each moment captured reflects the essence of
+            exploration and discovery.
+          </p>
+        </div>
+        <div className="grid lg:grid-cols-4 mt-8">
+          {stories.slice(0, 4).map((story) => (
+            <FourStoryCart story={story} key={story._id}></FourStoryCart>
+          ))}
+        </div>
+        <div className="flex justify-center mt-20">
+          <Link to="/usersStory">
+            <Button buttonText="All Stories"></Button>
+          </Link>
+        </div>
       </div>
+
+      {/*  */}
     </div>
   );
 };

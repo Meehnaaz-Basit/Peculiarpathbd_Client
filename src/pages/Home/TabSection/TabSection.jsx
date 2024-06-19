@@ -26,8 +26,10 @@ const TabSection = () => {
   };
   return (
     <div>
-      <div>
-        <h2>Tourist and travel guide</h2>
+      <div className="py-16 text-center">
+        <h2 className="font-bold font-pacifico text-3xl text-teal-500">
+          Tourist and Travel Guide
+        </h2>
       </div>
       <div className="max-w-6xl mx-auto">
         <Tabs
@@ -35,7 +37,7 @@ const TabSection = () => {
           onSelect={handleTabSelect}
           className="border-b-0"
         >
-          <TabList className="flex justify-center gap-4 border-b-2">
+          <TabList className="flex justify-center gap-4 border-b-2 border-teal-500 text-teal-500">
             <Tab>Overview</Tab>
             <Tab>Our Package</Tab>
             <Tab>Meet Our Tour Guides</Tab>

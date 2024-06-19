@@ -79,7 +79,7 @@ const BookingTable = ({ bookings, refetch }) => {
     {
       header: "Action",
       cell: ({ cell }) => {
-        const { _id: id, status } = cell.row.original; // Assuming _id is the ID field
+        const { _id: id, status } = cell.row.original;
         return renderActionButtons(id, status);
       },
     },

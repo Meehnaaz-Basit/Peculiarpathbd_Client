@@ -3,10 +3,12 @@ import Loader from "../../components/Loader/Loader";
 import axios from "axios";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const GuideProfileForm = ({ user }) => {
   const axiosCommon = useAxiosCommon();
-  const { _id, email, photoURL } = user;
+  const { email, photoURL } = user;
+  // console.log(user, "guide profile");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleGuideProfile = async (e) => {
@@ -67,14 +69,14 @@ const GuideProfileForm = ({ user }) => {
         Swal.fire({
           icon: "success",
           title: "Profile Updated!",
-          text: response.data.message, // Assuming backend sends { message: "Profile updated successfully" }
+          text: response.data.message,
         });
         form.reset();
       } else if (response.status === 404) {
         Swal.fire({
           icon: "info",
           title: "Profile Not Updated",
-          text: response.data.error, // Assuming backend sends { error: "User not found" }
+          text: response.data.error,
         });
       } else {
         Swal.fire({
@@ -97,7 +99,10 @@ const GuideProfileForm = ({ user }) => {
 
   return (
     <div>
-      <h2>Add Profile</h2>
+      <div className="flex justify-center gap-4">
+        <h2>Add Profile</h2>
+      </div>
+
       <div>
         <div className="card flex mx-auto  shrink-0 w-full max-w-5xl shadow-2xl bg-base-100">
           {isLoading ? (

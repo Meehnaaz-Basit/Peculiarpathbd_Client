@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../../../../hooks/useAxiosCommon";
 import OurGuideTabCard from "./OurGuideTabCard";
+import Loader from "../../../../../components/Loader/Loader";
 
 const OurGuideTab = () => {
   const axiosCommon = useAxiosCommon();
@@ -14,11 +15,15 @@ const OurGuideTab = () => {
   });
   // console.log(packages);
 
-  if (isLoading) return "loading ....";
+  if (isLoading)
+    return (
+      <div>
+        <Loader></Loader>
+      </div>
+    );
   return (
     <div>
-      <h2>our guides </h2>
-      <div className="grid lg:grid-cols-3 grid-cols-1 gap-6">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 md:mx-0 mx-3">
         {tourGuides.map((tourGuide) => (
           <OurGuideTabCard
             key={tourGuide._id}

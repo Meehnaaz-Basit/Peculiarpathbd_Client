@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 const TourTypeIconBox = ({ tourType }) => {
-  const { _id, icon, lable } = tourType;
+  const { _id, icon, lable, img } = tourType;
 
   const navigate = useNavigate();
 

@@ -5,6 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
+
   const {
     data: users = {},
     isLoading,
@@ -13,15 +14,16 @@ const ManageUsers = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const { data } = await axiosSecure.get("/users");
-      //   console.log(data);
+      console.log(data);
       return data;
     },
   });
 
   //
+  //
   const handleMakeGuide = (user) => {
     Swal.fire({
-      title: `Are you sure you want to make ${user.name} an Tour Guide?`,
+      title: `Are you sure you want to make ${user.name} a Tour Guide?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -32,25 +34,32 @@ const ManageUsers = () => {
         axiosSecure
           .patch(`/users/guide/${user._id}`)
           .then((res) => {
-            if (res.data.modifiedCount > 0) {
+            if (res.data.message) {
               refetch();
               Swal.fire({
                 title: `${user.name} is a Tour Guide now!`,
                 icon: "success",
               });
+            } else {
+              Swal.fire({
+                title: "Error!",
+                text: "There was an error making the user a Tour Guide.",
+                icon: "error",
+              });
             }
           })
           .catch((error) => {
-            console.error("Error making user admin:", error);
+            console.error("Error making user a Tour Guide:", error);
             Swal.fire({
               title: "Error!",
-              text: "There was an error making the user an admin.",
+              text: "There was an error making the user a Tour Guide.",
               icon: "error",
             });
           });
       }
     });
   };
+
   //
   const handleMakeAdmin = (user) => {
     Swal.fire({
