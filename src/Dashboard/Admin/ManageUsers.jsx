@@ -1,26 +1,43 @@
 import { useQuery } from "@tanstack/react-query";
-
+import {
+  useReactTable,
+  getCoreRowModel,
+  flexRender,
+  getPaginationRowModel,
+  getFilteredRowModel,
+} from "@tanstack/react-table";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useEffect, useState } from "react";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
+  const [disabledButtons, setDisabledButtons] = useState({});
+  const [filter, setFilter] = useState("");
 
   const {
-    data: users = {},
+    data: users = [],
     isLoading,
     refetch,
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await axiosSecure.get("/users");
+      const { data } = await axiosSecure.get("/request");
       console.log(data);
       return data;
     },
   });
 
-  //
-  //
+  useEffect(() => {
+    const newDisabledButtons = {};
+    users.forEach((user) => {
+      if (user.role === "admin" || user.role === "guide") {
+        newDisabledButtons[user._id] = { makeAdmin: true, makeGuide: true };
+      }
+    });
+    setDisabledButtons(newDisabledButtons);
+  }, [users]);
+
   const handleMakeGuide = (user) => {
     Swal.fire({
       title: `Are you sure you want to make ${user.name} a Tour Guide?`,
@@ -36,6 +53,10 @@ const ManageUsers = () => {
           .then((res) => {
             if (res.data.message) {
               refetch();
+              setDisabledButtons((prevState) => ({
+                ...prevState,
+                [user._id]: { makeAdmin: true, makeGuide: true },
+              }));
               Swal.fire({
                 title: `${user.name} is a Tour Guide now!`,
                 icon: "success",
@@ -60,7 +81,6 @@ const ManageUsers = () => {
     });
   };
 
-  //
   const handleMakeAdmin = (user) => {
     Swal.fire({
       title: `Are you sure you want to make ${user.name} an admin?`,
@@ -75,6 +95,10 @@ const ManageUsers = () => {
           .patch(`/users/admin/${user._id}`)
           .then((res) => {
             if (res.data.modifiedCount > 0) {
+              setDisabledButtons((prevState) => ({
+                ...prevState,
+                [user._id]: { makeAdmin: true, makeGuide: true },
+              }));
               refetch();
               Swal.fire({
                 title: `${user.name} is an Admin now!`,
@@ -94,67 +118,136 @@ const ManageUsers = () => {
     });
   };
 
+  const columns = [
+    {
+      header: "Sl",
+      cell: ({ row }) => row.index + 1,
+    },
+    {
+      header: "Name",
+      accessorKey: "name",
+    },
+    {
+      header: "Email",
+      accessorKey: "email",
+    },
+    {
+      header: "Role",
+      cell: ({ row }) => (
+        <td className="capitalize ">{row.original.role || "Tourist"}</td>
+      ),
+    },
+    {
+      header: "Action",
+      cell: ({ row }) => (
+        <div className="flex flex-row gap-4 items-center justify-center">
+          <div className="h-10 flex items-center text-center justify-center cursor-pointer">
+            <button
+              className="btn"
+              onClick={() => handleMakeAdmin(row.original)}
+              disabled={disabledButtons[row.original._id]?.makeAdmin}
+            >
+              Make Admin
+            </button>
+          </div>
+          <div className="h-10 flex items-center text-center justify-center cursor-pointer">
+            <button
+              className="btn"
+              onClick={() => handleMakeGuide(row.original)}
+              disabled={disabledButtons[row.original._id]?.makeGuide}
+            >
+              Make Tour Guide
+            </button>
+          </div>
+        </div>
+      ),
+    },
+  ];
+
+  const table = useReactTable({
+    data: users,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    state: {
+      globalFilter: filter,
+    },
+    onGlobalFilterChange: setFilter,
+  });
+
   if (isLoading) return "loading ....";
 
   return (
     <div>
-      <h2>this is user management</h2>
-      <div>
-        <h1>Wishlist</h1>
-        {users.length > 0 ? (
-          <div className="overflow-x-auto">
-            <table className="table text-center">
-              {/* head */}
-              <thead>
-                <tr>
-                  <th>Sl</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((item, index) => (
-                  <tr key={item._id}>
-                    <td>{index + 1}</td>
-                    <td>{item.name}</td>
-                    <td>{item.email}</td>
-                    <td>
-                      <div className="flex flex-row gap-4 items-center justify-center">
-                        <div className=" h-10  flex items-center text-center justify-center cursor-pointer  ">
-                          {item.role === "admin" ? (
-                            "Admin"
-                          ) : (
-                            <button
-                              className="btn "
-                              onClick={() => handleMakeAdmin(item)}
-                            >
-                              Make Admin
-                            </button>
-                          )}
-                        </div>
-                        <div className=" h-10  flex items-center text-center justify-center  cursor-pointer  ">
-                          {item.role === "guide" ? (
-                            "Tour Guide"
-                          ) : (
-                            <button
-                              className="btn "
-                              onClick={() => handleMakeGuide(item)}
-                            >
-                              Make Tour Guide
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      <h2>This is user management</h2>
+      <div className="overflow-x-auto">
+        <div>
+          <div className="my-4 space-x-4">
+            <span>Search by Name or Email</span>
+            <input
+              className="border-teal-500 border-b-2"
+              type="text"
+              value={filter}
+              placeholder="  Search ..."
+              onChange={(e) => setFilter(e.target.value)}
+            />
           </div>
-        ) : (
-          <p>No items in your wishlist</p>
-        )}
+          <div>{/* filter by role dropdown */}</div>
+        </div>
+        <table className="table border text-center">
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id}>
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="flex gap-1 mt-6">
+          <button className="btn btn-sm" onClick={() => table.setPageIndex(0)}>
+            First page
+          </button>
+          <button
+            className="btn btn-sm"
+            disabled={!table.getCanPreviousPage()}
+            onClick={() => table.previousPage()}
+          >
+            Previous page
+          </button>
+          <button
+            className="btn btn-sm"
+            disabled={!table.getCanNextPage()}
+            onClick={() => table.nextPage()}
+          >
+            Next page
+          </button>
+          <button
+            className="btn btn-sm"
+            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+          >
+            Last page
+          </button>
+        </div>
       </div>
     </div>
   );
