@@ -14,16 +14,20 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { FaArrowAltCircleLeft, FaHeart } from "react-icons/fa";
 
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
+
 const PackageSingleDetail = () => {
   const { user } = useAuth();
   console.log(user, "user in package detail page");
   const { id } = useParams();
   const navigate = useNavigate();
-
   const location = useLocation();
   const [startDate, setStartDate] = useState(new Date());
   const [previousLocation, setPreviousLocation] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { width, height } = useWindowSize();
+  const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
     if (location.state && location.state.from) {
@@ -74,25 +78,72 @@ const PackageSingleDetail = () => {
         tourGuide,
       };
       // console.log(bookings);
-      //
+
       const newBooking = await axiosCommon.post("/bookings", bookings);
       if (newBooking.data.insertedId) {
         // show success popup
-
         Swal.fire({
-          position: "top-end",
+          title: "Booked!",
+          text: "The Package has been booked",
           icon: "success",
-          title: "Booked Successfully",
-          showConfirmButton: false,
-          timer: 1500,
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Proceed",
+          cancelButtonText: "Close",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              title: "Go to Booking Page",
+              text: "Do you want to go to the booking page now?",
+              icon: "question",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Yes, go to booking page",
+              cancelButtonText: "No, close",
+            }).then((innerResult) => {
+              if (innerResult.isConfirmed) {
+                // Redirect to the booking page
+                window.location.href = `/dashboard/myBookings/${user?.email}`;
+              }
+            });
+          }
         });
         form.reset();
+        //
       }
     } catch (error) {
       console.error("Booking failed:", error);
     } finally {
       setLoading(false);
     }
+    // Check user's booking count
+    const userBookings = await axiosCommon.get(`/bookings/${user.email}`);
+    if (userBookings.data.length === 4) {
+      // Swal.fire({
+      //   title: "Congratulations!",
+      //   text: "You got a discount for booking more than 3 times!",
+      //   icon: "success",
+      // });
+      // setShowConfetti(true);
+      setShowConfetti(true);
+      Swal.fire({
+        title: "Congratulations!",
+        text: "You got a discount for booking more than 3 times!",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Go to booking page",
+        cancelButtonText: "No, close",
+      }).then((innerResult) => {
+        if (innerResult.isConfirmed) {
+          window.location.href = `/dashboard/myBookings/${user?.email}`;
+        }
+      });
+    }
+    //
   };
 
   if (isLoading) return "Loading.....";
@@ -423,7 +474,21 @@ const PackageSingleDetail = () => {
             )}
           </div>
         </div>
-
+        {showConfetti && (
+          <Confetti
+            width={width}
+            height={height}
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+              zIndex: 1000,
+              pointerEvents: "none",
+            }}
+          />
+        )}
         {/* booking form */}
       </div>
       <div className="flex gap-3 items-center text-teal-500">

@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import useAxiosCommon from "../../../../../hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
+import GuideRating from "./GuideRating";
 
 const GuideSingleDetail = () => {
   const { id } = useParams();
@@ -113,6 +114,9 @@ const GuideSingleDetail = () => {
             <p>No details yet</p>
           )}
         </div>
+      </div>
+      <div>
+        <GuideRating></GuideRating>
       </div>
     </div>
   );
