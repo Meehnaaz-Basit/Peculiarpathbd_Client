@@ -74,7 +74,7 @@ const AssignedTourTable = ({ assignTour, refetch }) => {
   const handleAccept = async (id) => {
     try {
       const response = await axiosCommon.patch(
-        `http://localhost:5000/bookings/${id}/status`,
+        `https://peculiar-paths-bd-server.vercel.app/bookings/${id}/status`,
         { status: "Accepted" }
       );
       if (response.status === 200) {
@@ -96,7 +96,7 @@ const AssignedTourTable = ({ assignTour, refetch }) => {
     console.log("rejected");
     try {
       const response = await axiosCommon.patch(
-        `http://localhost:5000/bookings/${id}/status`,
+        `https://peculiar-paths-bd-server.vercel.app/bookings/${id}/status`,
         { status: "Rejected" }
       );
       if (response.status === 200) {

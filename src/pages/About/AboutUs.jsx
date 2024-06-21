@@ -6,7 +6,7 @@ const AboutUs = () => {
           <h2 className="text-3xl font-extrabold text-gray-900">Our Vision</h2>
           <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <div>
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-teal-500 text-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -31,7 +31,7 @@ const AboutUs = () => {
               </div>
             </div>
             <div>
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-teal-500 text-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -56,7 +56,7 @@ const AboutUs = () => {
               </div>
             </div>
             <div>
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-teal-500 text-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -95,13 +95,12 @@ const AboutUs = () => {
               About Us
             </h1>
             <p className="font-normal text-base leading-6 text-gray-600 ">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout. The
-              point of using Lorem Ipsum.In the first place we have granted to
-              God, and by this our present charter confirmed for us and our
-              heirs forever that the English Church shall be free, and shall
-              have her rights entire, and her liberties inviolate; and we will
-              that it be thus observed; which is apparent from
+              Welcome to peculiarBD, your gateway to unforgettable travel
+              experiences. At peculiarBD, we are passionate about creating
+              journeys that inspire and memories that last a lifetime. Whether
+              you're seeking an adventurous trek through rugged landscapes or a
+              leisurely exploration of cultural wonders, we curate exceptional
+              travel experiences tailored to your interests.
             </p>
           </div>
           <div className="w-full lg:w-8/12">
@@ -119,13 +118,11 @@ const AboutUs = () => {
               Our Story
             </h1>
             <p className="font-normal text-base leading-6 text-gray-600 ">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout. The
-              point of using Lorem Ipsum.In the first place we have granted to
-              God, and by this our present charter confirmed for us and our
-              heirs forever that the English Church shall be free, and shall
-              have her rights entire, and her liberties inviolate; and we will
-              that it be thus observed; which is apparent from
+              At peculiarBD, our journey began with a passion for exploration
+              and a commitment to redefine travel experiences. Founded on the
+              principles of freedom and authenticity, we aim to inspire
+              wanderlust and create unforgettable memories for travelers around
+              the globe.
             </p>
           </div>
           <div className="w-full lg:w-8/12 lg:pt-8">

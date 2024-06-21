@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Shared/Navbar/Navbar";
 import toast, { Toaster } from "react-hot-toast";
+import Footer from "../components/Shared/Footer/Footer";
 const Main = () => {
   return (
     <div className="font-lato">
@@ -13,6 +14,9 @@ const Main = () => {
         <Outlet />
       </div>
       {/* footer */}
+      <div>
+        <Footer></Footer>
+      </div>
       <Toaster />
     </div>
   );

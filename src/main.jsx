@@ -33,6 +33,7 @@ import Request from "./Dashboard/User/Request";
 import AboutUs from "./pages/About/AboutUs";
 import PrivateRoute from "./components/Routes/PrivateRoute";
 import DashBoard from "./Dashboard/DashBoard";
+import Community from "./pages/community/Community";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/community",
+        element: <Community></Community>,
       },
       {
         path: "/contact",

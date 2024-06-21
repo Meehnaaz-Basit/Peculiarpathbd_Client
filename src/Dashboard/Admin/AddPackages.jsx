@@ -82,7 +82,7 @@ const AddPackages = () => {
 
   //   //    try {
   //   //      const response = await axios.post(
-  //   //        "http://localhost:5000/api/tours",
+  //   //        "https://peculiar-paths-bd-server.vercel.app/api/tours",
   //   //        form,
   //   //        {
   //   //          headers: {
