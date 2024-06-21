@@ -30,6 +30,9 @@ import MyBookings from "./Dashboard/User/MyBookings";
 import Blog from "./pages/Blog/Blog";
 import Contact from "./pages/contact/Contact";
 import Request from "./Dashboard/User/Request";
+import AboutUs from "./pages/About/AboutUs";
+import PrivateRoute from "./components/Routes/PrivateRoute";
+import DashBoard from "./Dashboard/DashBoard";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -48,8 +51,16 @@ const router = createBrowserRouter([
         element: <Blog></Blog>,
       },
       {
+        path: "/about",
+        element: <AboutUs></AboutUs>,
+      },
+      {
         path: "/contact",
-        element: <Contact></Contact>,
+        element: (
+          <PrivateRoute>
+            <Contact></Contact>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -87,8 +98,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashBoardLayout></DashBoardLayout>,
+    element: (
+      <PrivateRoute>
+        <DashBoardLayout></DashBoardLayout>
+      </PrivateRoute>
+    ),
     children: [
+      {
+        path: "/dashboard",
+        element: <DashBoard></DashBoard>,
+      },
       {
         path: "/dashboard/myProfile",
         element: <Profile></Profile>,
@@ -100,7 +119,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/myBookings/:email",
-        element: <MyBookings></MyBookings>,
+        element: (
+          <PrivateRoute>
+            <MyBookings></MyBookings>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/request/",

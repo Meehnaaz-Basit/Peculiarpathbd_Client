@@ -199,14 +199,14 @@ const Navbar = () => {
                   <div>
                     {user.photoURL ? (
                       <img
-                        className="md:w-14 md:h-14 w-10 h-10 rounded-full border-2 object-cover "
+                        className="md:w-14 md:h-14 w-10 h-10 cursor-pointer rounded-full border-2 object-cover "
                         title={user.displayName}
                         src={user.photoURL}
                         alt="Profile"
                       />
                     ) : (
                       <img
-                        className="md:w-14 md:h-14 w-10 h-10 rounded-full border-2  object-cover "
+                        className="md:w-14 md:h-14 w-10 h-10 rounded-full cursor-pointer border-2  object-cover "
                         src="https://i.ibb.co/X3yrLFJ/pngegg.png"
                         alt=""
                       />

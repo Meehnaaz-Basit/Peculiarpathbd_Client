@@ -17,7 +17,7 @@ const AllPackages = () => {
   if (isLoading) return "loading ....";
 
   return (
-    <div>
+    <div className="container mx-auto max-w-[1300px] w-[100%] lg-w[88%] px-0 pb-0">
       {packages.length}
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 my-12">
         {packages.map((item) => (

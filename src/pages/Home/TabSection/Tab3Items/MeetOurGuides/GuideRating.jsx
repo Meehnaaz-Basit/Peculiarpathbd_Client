@@ -1,11 +1,24 @@
 import Swal from "sweetalert2";
 import useAuth from "../../../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const GuideRating = () => {
   const { user } = useAuth();
-
+  const navigate = useNavigate();
   const handleRating = (e) => {
     e.preventDefault();
+
+    if (!user) {
+      Swal.fire({
+        position: "top-end",
+        icon: "warning",
+        title: "Need to Log in for Rating",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/login");
+      return;
+    }
     // Example: Form validation logic
     const form = e.target;
     const rating = form.rating.value;

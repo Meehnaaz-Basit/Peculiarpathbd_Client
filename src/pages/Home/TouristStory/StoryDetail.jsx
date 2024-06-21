@@ -3,9 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FacebookIcon, FacebookShareButton } from "react-share";
 import Loader from "../../../components/Loader/Loader";
+import useAuth from "./../../../hooks/useAuth";
 
 const StoryDetail = () => {
   const { id } = useParams();
+  const { user } = useAuth();
   const currentPage = window.location.href;
   const axiosSecure = useAxiosSecure();
   const { data: stories = {}, isLoading } = useQuery({
@@ -45,9 +47,11 @@ const StoryDetail = () => {
 
               <p className="mt-6">{stories.about}</p>
               <div className="card-actions justify-end">
-                <FacebookShareButton url={currentPage}>
-                  <FacebookIcon></FacebookIcon>
-                </FacebookShareButton>
+                {user && (
+                  <FacebookShareButton url={currentPage}>
+                    <FacebookIcon />
+                  </FacebookShareButton>
+                )}
               </div>
             </div>
           </div>

@@ -56,6 +56,19 @@ const PackageSingleDetail = () => {
 
   const handleBooking = async (e) => {
     e.preventDefault();
+
+    if (!user) {
+      Swal.fire({
+        position: "top-end",
+        icon: "warning",
+        title: "Need to Log in for Booking",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/login");
+      return;
+    }
+
     setLoading(true);
     try {
       const form = e.target;
