@@ -15,7 +15,7 @@ Welcome to PeculiarPathBD, your ultimate guide to exploring the beauty of Bangla
 
 - **Username:** Meehnaaz
 - **Password:** meehnaazAdmin27
-- **Site URL:** [PeculiarPathBD Live Site](#https://peculiarbd.netlify.app/)
+- **Site URL:** [PeculiarPathBD Live Site](https://peculiarbd.netlify.app/)
 
 ## Overview
 
