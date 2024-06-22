@@ -102,7 +102,7 @@ const Navbar = () => {
             <img
               src="https://i.ibb.co/kymMhSP/peculiar-path-bd-removebg-preview.png"
               alt="logo"
-              className="w-20"
+              className="md:w-20 w-12"
               style={{ animation: "spin 6s linear infinite" }}
             />
             PeculiarPathBD
