@@ -4,9 +4,11 @@ import axios from "axios";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const GuideProfileForm = ({ user }) => {
   const axiosCommon = useAxiosCommon();
+  const axiosSecure = useAxiosSecure();
   const { email, photoURL } = user;
   // console.log(user, "guide profile");
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +57,7 @@ const GuideProfileForm = ({ user }) => {
     console.log(updatedProfile);
 
     try {
-      const response = await axiosCommon.patch(
+      const response = await axiosSecure.patch(
         `/users/${email}`,
         updatedProfile,
         {
@@ -68,7 +70,7 @@ const GuideProfileForm = ({ user }) => {
       if (response.status === 200) {
         Swal.fire({
           icon: "success",
-          title: "Profile Updated!",
+          title: "Profile Updated Successfully in Guide section!",
           text: response.data.message,
         });
         form.reset();
@@ -91,7 +93,7 @@ const GuideProfileForm = ({ user }) => {
         title: "Update Failed",
         text: "Failed to update profile. Please try again later.",
       });
-      console.error("Error updating profile:", error);
+      console.error("Error updating profile:", error.message);
     } finally {
       setIsLoading(false);
     }

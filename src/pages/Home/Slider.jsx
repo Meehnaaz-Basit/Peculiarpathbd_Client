@@ -11,6 +11,8 @@ import { Parallax, Pagination, Navigation } from "swiper/modules";
 
 import backgroundImage from "./../../assets/image/cloudy-sky-beautiful-rainforest-lake.jpg";
 
+import { motion } from "framer-motion";
+
 const styles = {
   swiper: {
     width: "100%",
@@ -84,21 +86,51 @@ const Slider = () => {
             style={styles.title}
             data-swiper-parallax="-300"
           >
-            Unveil Bangladesh: Your Path to Adventure
+            <motion.h1
+              initial={{ y: -1000 }}
+              animate={{ y: 0 }}
+              transition={{
+                duration: "2",
+                delay: "1",
+              }}
+            >
+              {" "}
+              Unveil Bangladesh: Your Path to Adventure
+            </motion.h1>
           </div>
           <div
             className="subtitle font-semibold text-xl lg:font-5xl"
             style={styles.subtitle}
             data-swiper-parallax="-200"
           >
-            Explore the Beauty and Culture of Bangladesh
+            <motion.h1
+              initial={{ y: -1000 }}
+              animate={{ y: 0 }}
+              transition={{
+                duration: "2",
+                delay: "1",
+              }}
+            >
+              {" "}
+              Explore the Beauty and Culture of Bangladesh
+            </motion.h1>
           </div>
           <div className="text" style={styles.text} data-swiper-parallax="-100">
-            <p>
-              Discover Bangladesh with our exclusive tours. From vibrant Dhaka
-              to serene Sundarbans, each journey blends adventure, culture, and
-              natural beauty.
-            </p>
+            <motion.h1
+              initial={{ y: -1000 }}
+              animate={{ y: 0 }}
+              transition={{
+                duration: "2",
+                delay: "1",
+              }}
+            >
+              {" "}
+              <p>
+                Discover Bangladesh with our exclusive tours. From vibrant Dhaka
+                to serene Sundarbans, each journey blends adventure, culture,
+                and natural beauty.
+              </p>
+            </motion.h1>
           </div>
         </SwiperSlide>
         <SwiperSlide style={styles.swiperSlide} className="space-y-4">

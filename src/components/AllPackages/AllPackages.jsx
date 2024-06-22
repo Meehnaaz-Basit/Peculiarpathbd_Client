@@ -18,7 +18,11 @@ const AllPackages = () => {
 
   return (
     <div className="container mx-auto max-w-[1300px] w-[100%] lg-w[88%] px-0 pb-0">
-      {packages.length}
+      <div className="flex justify-center py-4">
+        <h1 className="font-bold font-pacifico text-3xl text-teal-500">
+          All Packages
+        </h1>
+      </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 my-12">
         {packages.map((item) => (
           <PackageCard key={item._id} item={item}></PackageCard>

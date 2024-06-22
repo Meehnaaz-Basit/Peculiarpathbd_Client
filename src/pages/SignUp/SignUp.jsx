@@ -97,7 +97,7 @@ const SignUp = () => {
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
-          <p className="text-sm text-gray-400">Welcome to StayVista</p>
+          <p className="text-sm text-gray-400">Welcome to PeculiarPathBd</p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-4">
@@ -110,7 +110,7 @@ const SignUp = () => {
                 name="name"
                 id="name"
                 placeholder="Enter Your Name Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-teal-500 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
               />
             </div>
@@ -136,7 +136,7 @@ const SignUp = () => {
                 id="email"
                 required
                 placeholder="Enter Your Email Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-teal-500 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
               />
             </div>
@@ -153,7 +153,7 @@ const SignUp = () => {
                 id="password"
                 required
                 placeholder="*******"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-teal-500 bg-gray-200 text-gray-900"
               />
             </div>
           </div>
@@ -162,7 +162,7 @@ const SignUp = () => {
             <button
               disabled={loading}
               type="submit"
-              className="bg-rose-500 w-full rounded-md py-3 text-white"
+              className="bg-teal-500 w-full rounded-md py-3 text-white"
             >
               {loading ? (
                 <TbFidgetSpinner className="animate-spin m-auto" />
@@ -192,7 +192,7 @@ const SignUp = () => {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="hover:underline hover:text-rose-500 text-gray-600"
+            className="hover:underline hover:text-teal-500 text-gray-600"
           >
             Login
           </Link>

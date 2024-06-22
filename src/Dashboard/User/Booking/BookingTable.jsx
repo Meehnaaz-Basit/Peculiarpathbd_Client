@@ -7,12 +7,35 @@ import {
 
 import Swal from "sweetalert2";
 import useAxiosCommon from "../../../hooks/useAxiosCommon";
+import { useEffect, useState } from "react";
 
 const BookingTable = ({ bookings, refetch }) => {
   // console.log(bookings, "data");
   const axiosCommon = useAxiosCommon();
+  const [discountApplied, setDiscountApplied] = useState(() => {
+    // from localStorage on component mount
+    return localStorage.getItem("discountApplied") === "true";
+  });
+  // Effect to save discountApplied to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem("discountApplied", discountApplied);
+  }, [discountApplied]);
 
-  const renderActionButtons = (id, status) => {
+  // State to track paid bookings
+  const [paidBookings, setPaidBookings] = useState(() => {
+    // Retrieve paid bookings from localStorage on component mount
+    const storedPaidBookings = localStorage.getItem("paidBookings");
+    return storedPaidBookings ? JSON.parse(storedPaidBookings) : [];
+  });
+
+  // Function to save paid bookings to localStorage
+  const savePaidBookingsToLocalStorage = (paidBookings) => {
+    localStorage.setItem("paidBookings", JSON.stringify(paidBookings));
+  };
+
+  const renderActionButtons = (id, status, packageName) => {
+    const isPaid = paidBookings.includes(id);
+
     if (status === "In Review" || status === "Rejected") {
       return (
         <button onClick={() => handleCancel(id)} className="btn btn-sm">
@@ -20,9 +43,24 @@ const BookingTable = ({ bookings, refetch }) => {
         </button>
       );
     } else if (status === "Accepted") {
-      return <button className="btn btn-sm">Pay</button>;
+      if (isPaid) {
+        return (
+          <button className="btn btn-sm" disabled>
+            Paid
+          </button>
+        );
+      } else {
+        return (
+          <button
+            className="btn btn-sm"
+            onClick={() => handlePay(id, packageName)}
+          >
+            Pay
+          </button>
+        );
+      }
     } else {
-      return null; // No action button for other statuses
+      return null;
     }
   };
 
@@ -132,9 +170,91 @@ const BookingTable = ({ bookings, refetch }) => {
     });
   };
 
+  const handlePay = (id, packageName) => {
+    Swal.fire({
+      title: `Do you want to pay ?`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Pay!",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // console.log("Paid:", id);
+
+          // Update local state and localStorage to mark booking as paid
+          const updatedPaidBookings = [...paidBookings, id];
+          setPaidBookings(updatedPaidBookings);
+          savePaidBookingsToLocalStorage(updatedPaidBookings);
+
+          // Show success message
+          Swal.fire({
+            title: "Paid!",
+            text: `You have paid.`,
+            icon: "success",
+          });
+
+          // Optionally refetch data after payment
+          refetch();
+        } catch (error) {
+          console.error("Error paying:", error);
+          Swal.fire({
+            title: "Error!",
+            text: "An error occurred while processing the payment.",
+            icon: "error",
+          });
+        }
+      }
+    });
+  };
+
+  const handleApply = () => {
+    Swal.fire({
+      title: `Do you want to Apply for Discount ?`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Apply!",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // Show success message
+          Swal.fire({
+            title: "Applied Discount!",
+            text: `You got discount.`,
+            icon: "success",
+          });
+          setDiscountApplied(true);
+          refetch();
+        } catch (error) {
+          console.error("Error paying:", error);
+          Swal.fire({
+            title: "Error!",
+            text: "An error occurred while processing the payment.",
+            icon: "error",
+          });
+        }
+      }
+    });
+  };
+
   return (
     <div>
       <div className="overflow-x-auto">
+        <div className="flex justify-end">
+          {bookings.length > 3 ? (
+            <div>
+              <button
+                onClick={handleApply}
+                className="btn bg-teal-500 text-white m-2"
+              >
+                Apply
+              </button>
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
         <table className="table border">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (

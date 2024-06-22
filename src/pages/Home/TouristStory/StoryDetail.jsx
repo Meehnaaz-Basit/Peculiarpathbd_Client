@@ -21,7 +21,6 @@ const StoryDetail = () => {
 
   return (
     <div>
-      <h2>story detail {id}</h2>
       <div className="flex justify-center my-8">
         {isLoading ? (
           <div className="flex justify-center items-center h-screen">

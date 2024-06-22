@@ -179,8 +179,12 @@ const AddPackages = () => {
   };
 
   return (
-    <div>
-      <h2>add packages by admin</h2>
+    <div className="max-w-5xl mx-auto">
+      <div className="flex justify-center py-3">
+        <h2 className="font-pacifico font-bold text-teal-500 text-3xl">
+          Add packages
+        </h2>
+      </div>
 
       <div>
         {isLoading ? (
@@ -202,6 +206,7 @@ const AddPackages = () => {
                 <div key={index} className="mb-2">
                   <input
                     type="file"
+                    required
                     accept="image/*"
                     onChange={(e) =>
                       handleChangeImage(index, e.target.files[0])
@@ -214,7 +219,7 @@ const AddPackages = () => {
                 <button
                   type="button"
                   onClick={handleAddImageField}
-                  className="btn btn-outline btn-accent"
+                  className="btn btn-outline btn-accent w-min"
                 >
                   + Add Image
                 </button>
@@ -227,9 +232,10 @@ const AddPackages = () => {
               </label>
               <textarea
                 name="aboutTour"
+                required
                 value={formData.aboutTour}
                 onChange={handleChange}
-                className="textarea textarea-bordered h-24"
+                className="textarea textarea-bordered h-24 w-full"
               />
             </div>
 
@@ -241,9 +247,10 @@ const AddPackages = () => {
                 <div key={index} className="mb-2">
                   <label className="label-text">{day.dayNumber}:</label>
                   <textarea
+                    required
                     value={day.activities}
                     onChange={(e) => handleChangeDay(index, e.target.value)}
-                    className="textarea textarea-bordered h-24"
+                    className="textarea textarea-bordered w-full h-24"
                   />
                 </div>
               ))}
@@ -251,7 +258,7 @@ const AddPackages = () => {
                 <button
                   type="button"
                   onClick={handleAddDayField}
-                  className="btn btn-outline btn-accent"
+                  className="btn btn-outline btn-accent w-min"
                 >
                   + Add Day
                 </button>
@@ -264,6 +271,7 @@ const AddPackages = () => {
               </label>
               <select
                 name="tourType"
+                required
                 value={formData.tourType}
                 onChange={handleChange}
                 className="select select-bordered"
@@ -283,6 +291,7 @@ const AddPackages = () => {
               </label>
               <input
                 type="text"
+                required
                 name="tripTitle"
                 value={formData.tripTitle}
                 onChange={handleChange}
@@ -296,6 +305,7 @@ const AddPackages = () => {
               </label>
               <input
                 type="number"
+                required
                 name="price"
                 value={formData.price}
                 onChange={handleChange}
@@ -303,7 +313,10 @@ const AddPackages = () => {
               />
             </div>
 
-            <button type="submit" className="btn btn-primary mt-4">
+            <button
+              type="submit"
+              className="btn bg-teal-500 text-white w-full mt-4"
+            >
               Submit
             </button>
           </form>
