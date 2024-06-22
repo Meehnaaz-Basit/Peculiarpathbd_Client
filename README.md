@@ -14,6 +14,7 @@ Welcome to PeculiarPathBD, your ultimate guide to exploring the beauty of Bangla
 ## Admin Credentials
 
 - **Username:** Meehnaaz
+- **UserEmail:** meehnaaz@gmail.com
 - **Password:** meehnaazAdmin27
 - **Site URL:** [PeculiarPathBD Live Site](https://peculiarbd.netlify.app/)
 
@@ -37,7 +38,6 @@ PeculiarPathBD is an online platform dedicated to providing comprehensive inform
 - Tourist, Tour Guide, and Admin roles with distinct functionalities.
 - User-friendly interfaces with intuitive navigation.
 - Optional implementation of Swiper for slide functionality.
-- Notification feature for special offers (optional task).
 
 ## Pages Included
 
