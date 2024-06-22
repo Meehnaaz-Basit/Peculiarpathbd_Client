@@ -28,7 +28,7 @@ const StoryDetail = () => {
             <Loader></Loader>
           </div>
         ) : (
-          <div className="card mt-8  glass">
+          <div className="card mt-8  glass mx-4">
             <figure>
               <img src={stories.image} className="object-cover" alt="car!" />
             </figure>

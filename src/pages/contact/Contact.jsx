@@ -1,8 +1,8 @@
 const Contact = () => {
   return (
     <>
-      <main className="py-14 ">
-        <div className="max-w-4xl mx-auto py-10 text-gray-600 md:px-8 shadow-lg">
+      <main className="py-14 container mx-auto max-w-[1300px] w-[100%] lg-w[88%] px-0 pb-0 ">
+        <div className="max-w-4xl mx-auto px-5 py-10 text-gray-600 md:px-8 shadow-lg">
           <div className="max-w-lg mx-auto space-y-3 sm:text-center">
             <h3 className="text-teal-600 font-semibold">Contact</h3>
             <p className="text-teal-500 font-pacifico text-3xl font-semibold sm:text-4xl">

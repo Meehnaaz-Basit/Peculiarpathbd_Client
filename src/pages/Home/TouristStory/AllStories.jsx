@@ -13,9 +13,13 @@ const AllStories = () => {
     },
   });
   return (
-    <div>
-      <h2>all stories</h2>
-      <div className="grid grid-cols-4 gap-8">
+    <div className="container mx-auto max-w-[1300px] w-[100%] lg-w[88%] px-0 pb-0 ">
+      <div className="text-center py-10">
+        <h2 className="font-pacifico text-teal-500 md:text-4xl text-2xl font-bold capitalize">
+          all stories
+        </h2>
+      </div>
+      <div className="grid  lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-8">
         {stories.map((story) => (
           <FourStoryCart story={story} key={story._id}></FourStoryCart>
         ))}

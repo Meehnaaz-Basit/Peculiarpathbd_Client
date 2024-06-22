@@ -13,7 +13,7 @@ const TourTypeIconBox = ({ tourType }) => {
     <div onClick={handleClick}>
       <div className="flex flex-col text-center items-center p-8 shadow-md w-44 cursor-pointer">
         <img src={icon} className="w-20 object-cover" alt="" />
-        <h1 className="uppercase font-bold text-2xl">{lable}</h1>
+        <h1 className="uppercase font-bold lg:text-2xl text-sm">{lable}</h1>
       </div>
     </div>
   );

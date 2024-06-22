@@ -19,7 +19,9 @@ const TourCat = ({ tourType }) => {
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
-        <h3 className="z-10 mt-3 text-3xl font-bold text-white">{lable}</h3>
+        <h3 className="z-10 mt-3 md:text-3xl text-lg font-bold text-white">
+          {lable}
+        </h3>
       </article>
     </div>
   );

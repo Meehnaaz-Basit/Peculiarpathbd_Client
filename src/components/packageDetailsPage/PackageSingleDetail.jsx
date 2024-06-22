@@ -175,7 +175,6 @@ const PackageSingleDetail = () => {
         <h2 className="text-teal-500 font-pacifico text-2xl capitalize font-bold">
           {packages.title}
         </h2>
-        <FaHeart className="text-xl"></FaHeart>
       </div>
 
       {/*  */}
@@ -187,7 +186,7 @@ const PackageSingleDetail = () => {
               <img
                 src={packages.spot_image[0]}
                 alt="Image 1"
-                className="w-full h-96 object-cover rounded-lg shadow-md "
+                className="w-full lg:h-72 md:h-56 h-40 object-cover rounded-lg shadow-md "
               />
             </div>
           )}
@@ -199,14 +198,14 @@ const PackageSingleDetail = () => {
                 <img
                   src={packages.spot_image[0]}
                   alt="Image 1"
-                  className="w-full h-96 object-cover rounded-lg shadow-md"
+                  className="w-full lg:h-72 md:h-56 h-40 object-cover rounded-lg shadow-md"
                 />
               </div>
               <div className="w-1/2">
                 <img
                   src={packages.spot_image[1]}
                   alt="Image 2"
-                  className="w-full h-96 object-cover rounded-lg shadow-md"
+                  className="w-full lg:h-72 md:h-56 h-40 object-cover rounded-lg shadow-md"
                 />
               </div>
             </div>
@@ -228,14 +227,14 @@ const PackageSingleDetail = () => {
                     <img
                       src={packages.spot_image[1]}
                       alt="Image 2"
-                      className="w-full h-96 object-cover  rounded-lg shadow-md"
+                      className="w-full lg:h-72 md:h-56 h-40 object-cover  rounded-lg shadow-md"
                     />
                   </div>
                   <div className="w-full">
                     <img
                       src={packages.spot_image[2]}
                       alt="Image 3"
-                      className="w-full h-96  object-cover rounded-lg shadow-md"
+                      className="w-full lg:h-72 md:h-56 h-40  object-cover rounded-lg shadow-md"
                     />
                   </div>
                 </div>
@@ -252,7 +251,7 @@ const PackageSingleDetail = () => {
                     <img
                       src={imageUrl}
                       alt={`Image ${index + 1}`}
-                      className="w-full h-96 object-cover rounded-lg shadow-md"
+                      className="w-full lg:h-72 md:h-56 h-40 object-cover rounded-lg shadow-md"
                     />
                   </div>
                 ))}
@@ -263,7 +262,7 @@ const PackageSingleDetail = () => {
                     <img
                       src={imageUrl}
                       alt={`Image ${index + 3}`}
-                      className="w-full h-96 object-cover rounded-lg shadow-md"
+                      className="w-full lg:h-72 md:h-56 h-40 object-cover rounded-lg shadow-md"
                     />
                   </div>
                 ))}
@@ -280,7 +279,7 @@ const PackageSingleDetail = () => {
                     <img
                       src={imageUrl}
                       alt={`Image ${index + 1}`}
-                      className="w-full h-96 rounded-lg shadow-md object-cover"
+                      className="w-full lg:h-72 md:h-56 h-40 rounded-lg shadow-md object-cover"
                     />
                   </div>
                 ))}
@@ -290,7 +289,7 @@ const PackageSingleDetail = () => {
                   <img
                     src={packages.spot_image[2]}
                     alt="Image 3"
-                    className="w-full h-96  rounded-lg shadow-md object-cover"
+                    className="w-full lg:h-72 md:h-56 h-40  rounded-lg shadow-md object-cover"
                   />
                 </div>
                 <div className="flex flex-1 gap-1">
@@ -299,7 +298,7 @@ const PackageSingleDetail = () => {
                       <img
                         src={imageUrl}
                         alt={`Image ${index + 4}`}
-                        className="w-full h-96 rounded-lg shadow-md object-cover"
+                        className="w-full lg:h-72 md:h-56 h-40 rounded-lg shadow-md object-cover"
                       />
                     </div>
                   ))}

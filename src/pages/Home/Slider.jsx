@@ -37,13 +37,13 @@ const styles = {
     backgroundSize: "cover",
     backgroundPosition: "center",
   },
-  title: {
-    fontSize: "41px",
-    fontWeight: 300,
-  },
-  subtitle: {
-    fontSize: "21px",
-  },
+  // title: {
+  //   fontSize: "41px",
+  //   fontWeight: 900,
+  // },
+  // subtitle: {
+  //   fontSize: "21px",
+  // },
   text: {
     fontSize: "14px",
     maxWidth: "700px",
@@ -80,14 +80,14 @@ const Slider = () => {
         ></div>
         <SwiperSlide style={styles.swiperSlide} className="space-y-4">
           <div
-            className="title font-pacifico"
+            className="title text-4xl lg:text-7xl font-bold font-pacifico"
             style={styles.title}
             data-swiper-parallax="-300"
           >
             Unveil Bangladesh: Your Path to Adventure
           </div>
           <div
-            className="subtitle"
+            className="subtitle font-semibold text-xl lg:font-5xl"
             style={styles.subtitle}
             data-swiper-parallax="-200"
           >
@@ -103,14 +103,14 @@ const Slider = () => {
         </SwiperSlide>
         <SwiperSlide style={styles.swiperSlide} className="space-y-4">
           <div
-            className="title font-pacifico"
+            className="title  text-4xl lg:text-7xl font-bold font-pacifico"
             style={styles.title}
             data-swiper-parallax="-300"
           >
             Meet Our Guides: Your Bangladesh Experts
           </div>
           <div
-            className="subtitle"
+            className="subtitle font-semibold text-xl lg:font-5xl"
             style={styles.subtitle}
             data-swiper-parallax="-200"
           >
@@ -125,14 +125,14 @@ const Slider = () => {
         </SwiperSlide>
         <SwiperSlide style={styles.swiperSlide} className="space-y-4">
           <div
-            className="title font-pacifico"
+            className="title  text-4xl lg:text-7xl font-bold font-pacifico"
             style={styles.title}
             data-swiper-parallax="-300"
           >
             Discover PeculiarBD
           </div>
           <div
-            className="subtitle"
+            className="subtitle font-semibold text-xl lg:font-5xl"
             style={styles.subtitle}
             data-swiper-parallax="-200"
           >
