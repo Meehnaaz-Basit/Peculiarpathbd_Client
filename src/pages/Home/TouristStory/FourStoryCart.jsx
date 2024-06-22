@@ -11,7 +11,9 @@ const FourStoryCart = ({ story }) => {
             alt=""
             className="w-56 h-56 border-8 border-green-500 rounded-lg object-cover "
           />
-          <p className="font-pacifico font-semibold mt-2">By: {name}</p>
+          <p className="font-pacifico font-semibold mt-2  text-teal-500">
+            By: {name}
+          </p>
         </div>
       </Link>
       <div></div>

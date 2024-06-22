@@ -95,8 +95,8 @@ const AboutUs = () => {
               About Us
             </h1>
             <p className="font-normal text-base leading-6 text-gray-600 ">
-              Welcome to peculiarBD, your gateway to unforgettable travel
-              experiences. At peculiarBD, we are passionate about creating
+              Welcome to PeculiarPathBD, your gateway to unforgettable travel
+              experiences. At PeculiarPathBD, we are passionate about creating
               journeys that inspire and memories that last a lifetime. Whether
               you're seeking an adventurous trek through rugged landscapes or a
               leisurely exploration of cultural wonders, we curate exceptional
@@ -118,11 +118,11 @@ const AboutUs = () => {
               Our Story
             </h1>
             <p className="font-normal text-base leading-6 text-gray-600 ">
-              At peculiarBD, our journey began with a passion for exploration
-              and a commitment to redefine travel experiences. Founded on the
-              principles of freedom and authenticity, we aim to inspire
-              wanderlust and create unforgettable memories for travelers around
-              the globe.
+              At PeculiarPathBD, our journey began with a passion for
+              exploration and a commitment to redefine travel experiences.
+              Founded on the principles of freedom and authenticity, we aim to
+              inspire wanderlust and create unforgettable memories for travelers
+              around the globe.
             </p>
           </div>
           <div className="w-full lg:w-8/12 lg:pt-8">

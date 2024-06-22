@@ -35,7 +35,7 @@ const Sidebar = () => {
                 width="100"
                 height="100"
               /> */}
-              <h2>Peculiar Paths BD</h2>
+              <h2>PeculiarPathBD</h2>
             </Link>
           </div>
         </div>
@@ -65,7 +65,7 @@ const Sidebar = () => {
                   width="100"
                   height="100"
                 /> */}
-                <h2>Peculiar Paths BD</h2>
+                <h2>PeculiarPathBD</h2>
               </Link>
             </div>
           </div>

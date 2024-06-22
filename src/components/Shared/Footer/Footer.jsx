@@ -3,22 +3,22 @@ const Footer = () => {
     <div className="bg-teal-50">
       <footer className="container mx-auto max-w-[1300px] w-[100%] lg-w[88%] px-0 pb-0 ">
         <div className="container px-6 py-8 mx-auto">
-          <div className="flex flex-col items-center text-center">
-            <a href="#">
-              {/* <img
-                className="w-auto h-7"
-                src="https://merakiui.com/images/full-logo.svg"
-                alt=""
-              /> */}
+          <div className="flex flex-col items-center  text-center">
+            <div className="flex justify-center text-center flex-col">
+              <img
+                className="w-20 mx-auto"
+                src="https://i.ibb.co/kymMhSP/peculiar-path-bd-removebg-preview.png"
+                alt="logo"
+                style={{ animation: "spin 6s linear infinite" }}
+              />
               <h1 className="text-3xl text-teal-500 font-bold font-pacifico">
-                PeculiarBD
+                PeculiarPathBD
               </h1>
-              {/* <img className="w-auto h-7" src="https://merakiui.com/images/full-logo.svg" alt=""> */}
-            </a>
+            </div>
 
             <div className="flex flex-wrap justify-center mt-6 -mx-4">
               <a
-                href="#"
+                href="/"
                 className="mx-4 text-sm text-black transition-colors duration-300 hover:text-teal-500 "
                 aria-label="Reddit"
               >
@@ -27,7 +27,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="#"
+                href="/about"
                 className="mx-4 text-sm text-black transition-colors duration-300 hover:text-teal-500"
                 aria-label="Reddit"
               >
@@ -36,7 +36,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="#"
+                href="/community"
                 className="mx-4 text-sm text-black transition-colors duration-300 hover:text-teal-500"
                 aria-label="Reddit"
               >
@@ -54,12 +54,12 @@ const Footer = () => {
               </a>
 
               <a
-                href="#"
+                href="/contact"
                 className="mx-4 text-sm text-black transition-colors duration-300 hover:text-teal-500"
                 aria-label="Reddit"
               >
                 {" "}
-                Cookies{" "}
+                Contact{" "}
               </a>
             </div>
           </div>
@@ -68,12 +68,20 @@ const Footer = () => {
 
           <div className="flex flex-col items-center sm:flex-row sm:justify-between">
             <p className="text-sm text-gray-900 ">
-              © Copyright 2021. All Rights Reserved.
+              © Copyright 2024. By{" "}
+              <a
+                href="https://www.facebook.com/meehnaazbasit"
+                target="_blank"
+                className="text-teal-500 font-semibold"
+              >
+                Meehnaaz Basit
+              </a>
+              . All Rights Reserved.
             </p>
 
             <div className="flex -mx-2">
               <a
-                href="#"
+                href="https://www.facebook.com/meehnaazbasit"
                 className="mx-2 text-gray-900 transition-colors duration-300  hover:text-teal-500 "
                 aria-label="Reddit"
               >
@@ -88,7 +96,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="#"
+                href="https://www.facebook.com/meehnaazbasit"
                 className="mx-2 text-gray-900 transition-colors duration-300  hover:text-teal-500 d"
                 aria-label="Facebook"
               >
@@ -103,7 +111,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="#"
+                href="https://github.com/Meehnaaz-Basit"
                 className="mx-2 text-gray-900 transition-colors duration-300  hover:text-teal-500 "
                 aria-label="Github"
               >

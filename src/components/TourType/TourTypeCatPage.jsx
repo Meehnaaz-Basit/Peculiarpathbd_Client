@@ -21,7 +21,13 @@ const TourTypeCatPage = () => {
 
   return (
     <div className="mx-8">
-      <h1>Packages for {tourType}</h1>
+      <div className="flex justify-center py-4 mb-4">
+        {" "}
+        <h1 className="text-3xl font-pacifico font-bold ">
+          Packages Category:{" "}
+          <span className="text-teal-500 capitalize">{tourType}</span>{" "}
+        </h1>
+      </div>
       {packages.length > 0 ? (
         <div className="grid lg:grid-cols-3 grid-cols-1 gap-8 ">
           {/* {packages.map((pkg) => (

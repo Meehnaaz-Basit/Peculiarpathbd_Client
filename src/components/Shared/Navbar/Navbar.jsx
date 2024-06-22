@@ -97,9 +97,15 @@ const Navbar = () => {
           </div>
           <a
             href="/"
-            className=" lg:text-4xl text-2xl font-bold font-pacifico text-teal-500"
+            className=" lg:text-4xl text-2xl flex gap-2 items-center font-bold font-pacifico text-teal-500"
           >
-            PeculiarBD
+            <img
+              src="https://i.ibb.co/kymMhSP/peculiar-path-bd-removebg-preview.png"
+              alt="logo"
+              className="w-20"
+              style={{ animation: "spin 6s linear infinite" }}
+            />
+            PeculiarPathBD
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">

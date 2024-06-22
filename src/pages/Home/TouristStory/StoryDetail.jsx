@@ -21,15 +21,19 @@ const StoryDetail = () => {
 
   return (
     <div>
-      <div className="flex justify-center my-8">
+      <div className="flex justify-center max-w-xl shadow-lg mx-auto my-8">
         {isLoading ? (
           <div className="flex justify-center items-center h-screen">
             <Loader></Loader>
           </div>
         ) : (
-          <div className="card mt-8  glass mx-4">
+          <div className="card mt-8  mx-4">
             <figure>
-              <img src={stories.image} className="object-cover" alt="car!" />
+              <img
+                src={stories.image}
+                className="object-cover w-full"
+                alt="car!"
+              />
             </figure>
             <div className="card-body">
               <div className="flex gap-6 items-center">

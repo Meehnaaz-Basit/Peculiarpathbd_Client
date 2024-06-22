@@ -161,7 +161,7 @@ const Slider = () => {
             style={styles.title}
             data-swiper-parallax="-300"
           >
-            Discover PeculiarBD
+            Discover PeculiarPathBD
           </div>
           <div
             className="subtitle font-semibold text-xl lg:font-5xl"
@@ -172,7 +172,7 @@ const Slider = () => {
           </div>
           <div className="text" style={styles.text} data-swiper-parallax="-100">
             <p>
-              PeculiarBD offers personalized tours showcasing Bangladesh's
+              PeculiarPathBD offers personalized tours showcasing Bangladesh's
               beauty, culture, and vibrant communities. With our expertise and
               dedication to service, join us for a journey you'll cherish.
             </p>
