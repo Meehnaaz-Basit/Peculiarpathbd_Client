@@ -9,7 +9,7 @@ const FourStoryCart = ({ story }) => {
           <img
             src={image}
             alt=""
-            className="w-56 h-56 border-8 border-green-500 rounded-lg object-cover "
+            className="w-56 h-56 shadow-lg rounded-lg object-cover "
           />
           <p className="font-pacifico font-semibold mt-2  text-teal-500">
             By: {name}

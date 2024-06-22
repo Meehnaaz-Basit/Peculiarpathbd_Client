@@ -1,6 +1,7 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Button from "../../../components/Shared/button/Button";
 import { FacebookIcon, FacebookShareButton } from "react-share";
 import Loader from "../../../components/Loader/Loader";
 import useAuth from "./../../../hooks/useAuth";
@@ -59,6 +60,11 @@ const StoryDetail = () => {
             </div>
           </div>
         )}
+      </div>
+      <div className="flex justify-center my-5">
+        <Link to="/usersStory">
+          <Button buttonText="All Stories"></Button>
+        </Link>
       </div>
     </div>
   );

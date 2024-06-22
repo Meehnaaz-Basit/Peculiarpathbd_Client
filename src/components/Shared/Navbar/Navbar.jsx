@@ -219,12 +219,12 @@ const Navbar = () => {
                     )}
                   </div>
                 </summary>
-                <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-                  <li>
-                    <a className="disabled">{user?.displayName}</a>
+                <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-56">
+                  <li className=" disabled cursor-pointer">
+                    <p className="disabled ">{user?.displayName}</p>
                   </li>
-                  <li>
-                    <a>{user?.email}</a>
+                  <li className=" disabled cursor-pointer">
+                    <p>{user?.email}</p>
                   </li>
                   <li>
                     <Link to="/dashboard">Dashboard</Link>

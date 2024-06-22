@@ -28,14 +28,30 @@ const ManageUsers = () => {
     },
   });
 
+  // useEffect(() => {
+  //   const newDisabledButtons = {};
+  //   users.forEach((user) => {
+  //     if (user.role === "admin" || user.role === "guide") {
+  //       newDisabledButtons[user._id] = { makeAdmin: true, makeGuide: true };
+  //     }
+  //   });
+  //   setDisabledButtons(newDisabledButtons);
+  // }, [users]);
+
   useEffect(() => {
-    const newDisabledButtons = {};
-    users.forEach((user) => {
-      if (user.role === "admin" || user.role === "guide") {
-        newDisabledButtons[user._id] = { makeAdmin: true, makeGuide: true };
-      }
-    });
-    setDisabledButtons(newDisabledButtons);
+    //
+    if (users.length > 0) {
+      const newDisabledButtons = {};
+      users.forEach((user) => {
+        if (user.role === "admin" || user.role === "guide") {
+          newDisabledButtons[user._id] = {
+            makeAdmin: user.role === "admin",
+            makeGuide: user.role === "guide",
+          };
+        }
+      });
+      setDisabledButtons(newDisabledButtons);
+    }
   }, [users]);
 
   const handleMakeGuide = (user) => {
@@ -95,11 +111,12 @@ const ManageUsers = () => {
           .patch(`/users/admin/${user._id}`)
           .then((res) => {
             if (res.data.modifiedCount > 0) {
+              refetch();
               setDisabledButtons((prevState) => ({
                 ...prevState,
                 [user._id]: { makeAdmin: true, makeGuide: true },
               }));
-              refetch();
+
               Swal.fire({
                 title: `${user.name} is an Admin now!`,
                 icon: "success",
