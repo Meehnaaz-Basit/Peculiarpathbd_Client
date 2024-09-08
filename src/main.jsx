@@ -35,6 +35,7 @@ import PrivateRoute from "./components/Routes/PrivateRoute";
 import DashBoard from "./Dashboard/DashBoard";
 import Community from "./pages/community/Community";
 import PaymentSuccess from "./Dashboard/User/Booking/paymentSuccess/PaymentSuccess";
+import PaymentFailed from "./Dashboard/User/Booking/paymentFailed/PaymentFailed";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -103,6 +104,10 @@ const router = createBrowserRouter([
       {
         path: "/payment/success/:tranId",
         element: <PaymentSuccess></PaymentSuccess>,
+      },
+      {
+        path: "/payment/failed/:tranId",
+        element: <PaymentFailed></PaymentFailed>,
       },
     ],
   },
