@@ -78,7 +78,7 @@ const BookingTable = ({ bookings, refetch }) => {
   };
 
   const data = bookings || [];
-  console.log(data, "table data");
+  // console.log(data, "table data");
   const columns = [
     {
       header: "#",
@@ -170,9 +170,64 @@ const BookingTable = ({ bookings, refetch }) => {
     });
   };
 
-  const handlePay = (id, packageName) => {
+  // const handlePay = (id, packageName) => {
+  //   Swal.fire({
+  //     title: `Do you want to pay?`,
+  //     icon: "question",
+  //     showCancelButton: true,
+  //     confirmButtonText: "Yes, Pay!",
+  //     cancelButtonText: "Cancel",
+  //   }).then(async (result) => {
+  //     if (result.isConfirmed) {
+  //       try {
+  //         // Ensure bookings are properly fetched and available
+  //         if (bookings && bookings.length > 0) {
+  //           // Find the specific booking using the provided id
+  //           const booking = bookings.find((booking) => booking._id === id);
+
+  //           // Check if booking was found
+  //           if (booking) {
+  //             // Log the booking information to the console
+  //             // console.log("Booking Information:", booking);
+  //             const order = await axiosCommon.post("/order", booking);
+  //           } else {
+  //             console.warn("Booking not found for the provided id:", id);
+  //           }
+  //         } else {
+  //           console.warn("No bookings available to search.");
+  //         }
+
+  //         // Update local state and localStorage to mark booking as paid
+  //         const updatedPaidBookings = [...paidBookings, id];
+  //         setPaidBookings(updatedPaidBookings);
+  //         savePaidBookingsToLocalStorage(updatedPaidBookings);
+
+  //         // Show success message
+  //         Swal.fire({
+  //           title: "Paid!",
+  //           text: `You have paid.`,
+  //           icon: "success",
+  //         });
+
+  //         // Optionally refetch data after payment
+  //         refetch();
+  //       } catch (error) {
+  //         console.error("Error paying:", error);
+  //         Swal.fire({
+  //           title: "Error!",
+  //           text: "An error occurred while processing the payment.",
+  //           icon: "error",
+  //         });
+  //       }
+  //     }
+  //   });
+  // };
+
+  //
+
+  const handlePay = async (id, packageName) => {
     Swal.fire({
-      title: `Do you want to pay ?`,
+      title: `Do you want to pay for the ${packageName} package?`,
       icon: "question",
       showCancelButton: true,
       confirmButtonText: "Yes, Pay!",
@@ -180,27 +235,57 @@ const BookingTable = ({ bookings, refetch }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          // console.log("Paid:", id);
+          // Check if bookings are available
+          if (!bookings || bookings.length === 0) {
+            console.warn("No bookings available to search.");
+            return;
+          }
 
-          // Update local state and localStorage to mark booking as paid
+          // Find the specific booking by id
+          const booking = bookings?.find((booking) => booking._id === id);
+          if (!booking) {
+            console.warn("Booking not found for the provided id:", id);
+            return;
+          }
+
+          // Log the booking information if needed
+          // console.log("Booking Information:", booking);
+
+          // Send booking data to the order API
+          fetch("http://localhost:5000/order/confirm", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(booking),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              window.location.replace(result.url);
+              console.log(result);
+            });
+
+          // Update local state and localStorage
           const updatedPaidBookings = [...paidBookings, id];
           setPaidBookings(updatedPaidBookings);
           savePaidBookingsToLocalStorage(updatedPaidBookings);
 
           // Show success message
-          Swal.fire({
-            title: "Paid!",
-            text: `You have paid.`,
-            icon: "success",
-          });
+          // Swal.fire({
+          //   title: "Paid!",
+          //   text: `You have successfully paid for the ${packageName} package.`,
+          //   icon: "success",
+          // });
 
-          // Optionally refetch data after payment
+          // Refetch data after payment if necessary
           refetch();
         } catch (error) {
-          console.error("Error paying:", error);
+          console.error("Error processing payment:", error);
+
+          // Show error message
           Swal.fire({
             title: "Error!",
-            text: "An error occurred while processing the payment.",
+            text: "An error occurred while processing the payment. Please try again later.",
             icon: "error",
           });
         }
@@ -242,7 +327,7 @@ const BookingTable = ({ bookings, refetch }) => {
     <div>
       <div className="overflow-x-auto">
         <div className="flex justify-end">
-          {bookings.length > 3 ? (
+          {bookings?.length > 3 ? (
             <div>
               <button
                 onClick={handleApply}
